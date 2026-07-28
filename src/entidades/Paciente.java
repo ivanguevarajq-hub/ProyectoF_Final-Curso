@@ -15,7 +15,9 @@ public class Paciente extends Persona{
     private String numeroHistoriaClinica;
     private EstadoPaciente estado;  
     public enum EstadoPaciente { ACTIVO, INACTIVO }
-
+    public Paciente(){
+        super();
+    }
     public Paciente(String apoderado, String numeroHistoriaClinica, EstadoPaciente estado, String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion) {
         super(dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion);
         this.apoderado = apoderado;

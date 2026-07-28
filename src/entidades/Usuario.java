@@ -20,7 +20,9 @@ public class Usuario extends Persona{
         ADMINISTRADOR, RECEPCIONISTA, MEDICO, ENFERMERA, 
         LABORATORISTA, FARMACEUTICO, CAJERO, DIRECTOR_MEDICO
     }
-
+    public Usuario(){
+    super();
+    }
     public Usuario(int idUsuario, String nombreUsuario, String contrasena, RolUsuario rol, boolean activo, String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion) {
         super(dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion);
         this.idUsuario = idUsuario;

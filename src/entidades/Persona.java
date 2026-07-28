@@ -16,7 +16,7 @@ public class Persona {
     protected char sexo; 
     protected String telefono;
     protected String direccion;
-
+    public Persona(){}
     public Persona(String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion) {
         this.dni = dni;
         this.nombres = nombres;

@@ -13,6 +13,9 @@ public class Medico extends Persona{
     private String numeroColegiatura; 
     private String especialidad; 
     private boolean activo;
+    public Medico(){
+        super();
+    }
 public Medico(String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion, String numeroColegiatura, String especialidad, boolean activo) {
         super(dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion); 
         this.numeroColegiatura = numeroColegiatura;
