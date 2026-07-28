@@ -16,7 +16,9 @@ public class Cita {
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private EstadoCita estado; 
-
+    public Cita() {
+        super();
+    }
     public enum EstadoCita { PROGRAMADA, CONFIRMADA, ATENDIDA, CANCELADA, NO_ASISTIO }
 
     public Cita(int idCita, Paciente paciente, Medico medico, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, EstadoCita estado) {

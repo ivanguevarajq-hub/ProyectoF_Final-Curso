@@ -16,7 +16,10 @@ public class Comprobante {
     private LocalDateTime fechaHora;
 
     public enum MetodoPago { EFECTIVO, TARJETA, TRANSFERENCIA, BILLETERA_ELECTRONICA }
-
+    
+    public Comprobante() {
+        super();
+    }
     public Comprobante(String numeroComprobante, AtencionMedica atencionMedica, double montoTotal, MetodoPago metodoPago, LocalDateTime fechaHora) {
         this.numeroComprobante = numeroComprobante;
         this.atencionMedica = atencionMedica;

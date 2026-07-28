@@ -17,7 +17,9 @@ public class AtencionMedica {
     private String diagnostico; 
     private String tratamiento; 
     private String observaciones;
-
+    public AtencionMedica() {
+        super();
+    }
     public AtencionMedica(int idAtencion, Cita cita, String motivoConsulta, String antecedentes, String signosVitales, String diagnostico, String tratamiento, String observaciones) {
         this.idAtencion = idAtencion;
         this.cita = cita;
