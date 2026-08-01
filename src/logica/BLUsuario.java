@@ -7,6 +7,7 @@ package logica;
 import datos.*;
 import entidades.*;
 import excepciones.DatosInvalidosException;
+import java.security.MessageDigest;
 import java.time.LocalDate;
 
 /**
@@ -14,6 +15,19 @@ import java.time.LocalDate;
  * @author samue
  */
 public class BLUsuario {
+    private static String aplicarHash(String password) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(password.getBytes("UTF-8"));
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 
     public static Usuario iniciarSesion(String nombreUsuario, String contrasena) throws Exception {
         if (nombreUsuario == null || nombreUsuario.trim().isEmpty() || nombreUsuario.startsWith(" ")) {
@@ -23,15 +37,20 @@ public class BLUsuario {
             throw new DatosInvalidosException("La contraseña es obligatoria.");
         }
 
-        Usuario usu = DALUsuario.autenticarUsuario(nombreUsuario.trim(), contrasena.trim());
+        String contrasenaHash = aplicarHash(contrasena.trim());
+
+        Usuario usu = DALUsuario.autenticarUsuario(nombreUsuario.trim(), contrasenaHash);
         
         if (usu == null) {
             throw new DatosInvalidosException("Credenciales incorrectas o usuario bloqueado.");
         }
+
+        DALAuditoria.registrarAccionAuditoria(usu.getNombreUsuario(), "Seguridad", "Inicio de sesión exitoso");
+
         return usu;
     }
 
-    public static boolean registrarUsuario(String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion, String nombreUsuario, String contrasena, Usuario.RolUsuario rol) throws Exception {
+    public static boolean registrarUsuario(String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion, String nombreUsuario, String contrasena, Usuario.RolUsuario rol, String usuarioAuditoria) throws Exception {
 
         if (dni == null || dni.trim().length() != 8 || !dni.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El DNI debe tener exactamente 8 números.");
@@ -46,25 +65,33 @@ public class BLUsuario {
             throw new DatosInvalidosException("La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
         }
 
-       Usuario usu = new Usuario(
+        String contrasenaEncriptada = aplicarHash(passLimpio);
+
+        Usuario usu = new Usuario(
             0,                           
             nombreUsuario.trim(),        
-            passLimpio,                    
+            contrasenaEncriptada, 
             rol,                           
             true,                          
-            dni.trim(),                   
+            dni.trim(),                    
             nombres.trim(),                
             apellidos.trim(),            
-            fechaNacimiento,               
+            fechaNacimiento,                
             sexo,                          
-            telefono.trim(),               
-            direccion.trim()               
+            telefono.trim(),                
+            direccion.trim()                
         );
-       
-        return DALUsuario.registrarUsuario(usu);
+        
+        boolean exito = DALUsuario.registrarUsuario(usu);
+
+        if (exito) {
+            DALAuditoria.registrarAccionAuditoria(usuarioAuditoria, "Gestión de Usuarios", "Creación de usuario: " + usu.getNombreUsuario());
+        }
+
+        return exito;
     }
 
-    public static boolean bloquearUsuario(int idUsuario) throws Exception {
+    public static boolean bloquearUsuario(int idUsuario, String usuarioAuditoria) throws Exception {
         if (idUsuario <= 0) {
             throw new DatosInvalidosException("El ID del usuario a bloquear no es válido.");
         }
@@ -73,6 +100,9 @@ public class BLUsuario {
         if (!exito) {
             throw new DatosInvalidosException("No se pudo bloquear al usuario. Es posible que no exista.");
         }
+
+        DALAuditoria.registrarAccionAuditoria(usuarioAuditoria, "Gestión de Usuarios", "Bloqueo de ID: " + idUsuario);
+
         return exito;
     }
 }

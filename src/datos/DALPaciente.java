@@ -5,6 +5,7 @@
 package datos;
 
 import entidades.Paciente;
+import entidades.Paciente.EstadoPaciente;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,7 +18,6 @@ import java.util.List;
  *
  * @author samue
  */
-
 public class DALPaciente {
 
     public static boolean registrarPaciente(Paciente paciente) {
@@ -63,7 +63,7 @@ public class DALPaciente {
     public static List<Paciente> buscarPacientes(String parametroBusqueda) {
         List<Paciente> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM Pacientes WHERE dni LIKE ? OR nombres LIKE ? OR numeroHistoriaClinica LIKE ? AND estado = 'ACTIVO'";
+        String sql = "SELECT * FROM Pacientes WHERE (dni LIKE ? OR nombres LIKE ? OR numeroHistoriaClinica LIKE ?) AND estado = 'ACTIVO'";
         
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -75,11 +75,20 @@ public class DALPaciente {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Paciente p = new Paciente();
-                    p.setDni(rs.getString("dni"));
-                    p.setNombres(rs.getString("nombres"));
-                    p.setApellidos(rs.getString("apellidos"));
-                    p.setNumeroHistoriaClinica(rs.getString("numeroHistoriaClinica"));
+          
+                    Paciente p = new Paciente.Builder()
+                            .dni(rs.getString("dni"))
+                            .nombres(rs.getString("nombres"))
+                            .apellidos(rs.getString("apellidos"))
+                            .fechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate())
+                            .sexo(rs.getString("sexo").charAt(0))
+                            .telefono(rs.getString("telefono"))
+                            .direccion(rs.getString("direccion"))
+                            .apoderado(rs.getString("apoderado"))
+                            .numeroHistoriaClinica(rs.getString("numeroHistoriaClinica"))
+                            .estado(EstadoPaciente.valueOf(rs.getString("estado")))
+                            .build();
+                            
                     lista.add(p);
                 }
             }

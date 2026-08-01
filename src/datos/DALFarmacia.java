@@ -4,6 +4,7 @@
  */
 package datos;
 
+import entidades.Medicamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +16,9 @@ import java.sql.SQLException;
  */
 public class DALFarmacia {
 
-    public static int consultarStockMedicamento(int idMedicamento) {
-        String sql = "SELECT stockActual FROM Medicamentos WHERE idMedicamento = ?";
-        int stock = 0;
+    public static Medicamento obtenerMedicamento(int idMedicamento) {
+        String sql = "SELECT * FROM Medicamentos WHERE idMedicamento = ?";
+        Medicamento med = null;
         
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -25,17 +26,26 @@ public class DALFarmacia {
             ps.setInt(1, idMedicamento);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    stock = rs.getInt("stockActual");
+                    med = new Medicamento(
+                            rs.getInt("idMedicamento"),
+                            rs.getString("nombre"),
+                            rs.getInt("stockActual"),
+                            rs.getInt("stockMinimo")
+                    );
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al consultar stock: " + e.getMessage());
+            System.err.println("Error al consultar medicamento: " + e.getMessage());
         }
-        return stock;
+        return med;
+    }
+
+    public static int consultarStockMedicamento(int idMedicamento) {
+        Medicamento med = obtenerMedicamento(idMedicamento);
+        return med != null ? med.getStockActual() : 0;
     }
 
     public static boolean entregarMedicamento(int idMedicamento, int cantidadEntregada) {
-
         String sql = "UPDATE Medicamentos SET stockActual = stockActual - ? WHERE idMedicamento = ? AND stockActual >= ?";
         
         try (Connection conn = Conexion.getInstancia().realizarConexion();

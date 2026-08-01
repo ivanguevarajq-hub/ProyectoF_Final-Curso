@@ -39,35 +39,36 @@ public class BLPaciente {
             throw new DatosInvalidosException("El paciente es menor de edad, el nombre del apoderado es obligatorio.");
         }
 
-        Paciente pac = new Paciente(
-                apoderado != null ? apoderado.trim() : "",
-                numeroHistoriaClinica != null ? numeroHistoriaClinica.trim() : "",
-                Paciente.EstadoPaciente.ACTIVO,
-                dni.trim(),
-                nombres.trim(),
-                apellidos.trim(),
-                fechaNacimiento,
-                sexo,
-                telefono.trim(),
-                direccion != null ? direccion.trim() : ""
-        );
+        Paciente pac = new Paciente.Builder()
+                .dni(dni.trim())
+                .nombres(nombres.trim())
+                .apellidos(apellidos.trim())
+                .fechaNacimiento(fechaNacimiento)
+                .sexo(sexo)
+                .telefono(telefono.trim())
+                .direccion(direccion != null ? direccion.trim() : "")
+                .apoderado(apoderado != null ? apoderado.trim() : "")
+                .numeroHistoriaClinica(numeroHistoriaClinica != null ? numeroHistoriaClinica.trim() : "")
+                .estado(Paciente.EstadoPaciente.ACTIVO)
+                .build();
 
         return DALPaciente.registrarPaciente(pac);
     }
 
     public static boolean modificarPaciente(String dni, String telefono, String direccion, String apoderado) throws Exception {
+        
         if (dni == null || dni.trim().length() != 8 || !dni.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El DNI proporcionado para modificar no es válido.");
         }
         if (telefono == null || telefono.trim().length() != 9 || !telefono.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El nuevo teléfono debe contener exactamente 9 números.");
         }
-
-        Paciente pac = new Paciente();
-        pac.setDni(dni.trim());
-        pac.setTelefono(telefono.trim());
-        pac.setDireccion(direccion != null ? direccion.trim() : "");
-        pac.setApoderado(apoderado != null ? apoderado.trim() : "");
+        Paciente pac = new Paciente.Builder()
+                .dni(dni.trim())
+                .telefono(telefono.trim())
+                .direccion(direccion != null ? direccion.trim() : "")
+                .apoderado(apoderado != null ? apoderado.trim() : "")
+                .build();
 
         boolean exito = DALPaciente.modificarPaciente(pac);
         if (!exito) {

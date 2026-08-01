@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class BLCaja {
 
     public static boolean registrarPago(int idAtencion, String numeroComprobante, double montoTotal, Comprobante.MetodoPago metodoPago) throws Exception {
-        
         if (idAtencion <= 0) {
             throw new DatosInvalidosException("El pago debe estar asociado a un ID de atención médica válido.");
         }
@@ -30,8 +29,9 @@ public class BLCaja {
             throw new DatosInvalidosException("Debe seleccionar un método de pago válido (Efectivo, Tarjeta, etc.).");
         }
 
-        AtencionMedica atencion = new AtencionMedica();
-        atencion.setIdAtencion(idAtencion);
+        AtencionMedica atencion = new AtencionMedica.Builder()
+                .idAtencion(idAtencion)
+                .build();
 
         Comprobante comp = new Comprobante();
         comp.setAtencionMedica(atencion);
