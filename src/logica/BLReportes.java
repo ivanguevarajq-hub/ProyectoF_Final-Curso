@@ -4,7 +4,7 @@
  */
 package logica;
 
-import datos.DALReportes;
+import datos.*;
 import excepciones.DatosInvalidosException;
 import java.time.LocalDate;
 import java.util.Map;
@@ -16,8 +16,7 @@ import java.util.Map;
 public class BLReportes {
 
     public static Map<String, Integer> obtenerPacientesPorEspecialidad() throws Exception {
-        DALReportes dal = new DALReportes();
-        Map<String, Integer> reporte = dal.obtenerPacientesPorEspecialidad();
+        Map<String, Integer> reporte = DALReportes.obtenerPacientesPorEspecialidad();
         
         if (reporte == null || reporte.isEmpty()) {
             throw new DatosInvalidosException("Actualmente no hay datos suficientes de citas atendidas para generar el reporte de especialidades.");
@@ -33,7 +32,6 @@ public class BLReportes {
             throw new DatosInvalidosException("No se pueden consultar los ingresos de fechas futuras.");
         }
 
-        DALReportes dal = new DALReportes();
-        return dal.obtenerIngresosDelDia(java.sql.Date.valueOf(fecha));
+        return DALReportes.obtenerIngresosDelDia(java.sql.Date.valueOf(fecha));
     }
 }

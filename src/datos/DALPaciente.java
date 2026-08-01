@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DALPaciente {
 
-    public boolean registrarPaciente(Paciente paciente) {
+    public static boolean registrarPaciente(Paciente paciente) {
         String sql = "INSERT INTO Pacientes (dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion, apoderado, numeroHistoriaClinica, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -43,7 +43,7 @@ public class DALPaciente {
         }
     }
 
-    public boolean modificarPaciente(Paciente paciente) {
+    public static boolean modificarPaciente(Paciente paciente) {
         String sql = "UPDATE Pacientes SET telefono = ?, direccion = ?, apoderado = ? WHERE dni = ?";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -60,7 +60,7 @@ public class DALPaciente {
         }
     }
 
-    public List<Paciente> buscarPacientes(String parametroBusqueda) {
+    public static List<Paciente> buscarPacientes(String parametroBusqueda) {
         List<Paciente> lista = new ArrayList<>();
 
         String sql = "SELECT * FROM Pacientes WHERE dni LIKE ? OR nombres LIKE ? OR numeroHistoriaClinica LIKE ? AND estado = 'ACTIVO'";

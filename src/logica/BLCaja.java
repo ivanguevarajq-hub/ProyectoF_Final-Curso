@@ -4,9 +4,8 @@
  */
 package logica;
 
-import datos.DALCaja;
-import entidades.AtencionMedica;
-import entidades.Comprobante;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
 import java.time.LocalDateTime;
 
@@ -41,8 +40,7 @@ public class BLCaja {
         comp.setMetodoPago(metodoPago);
         comp.setFechaHora(LocalDateTime.now());
 
-        DALCaja dal = new DALCaja();
-        boolean exito = dal.registrarPago(comp);
+        boolean exito = DALCaja.registrarPago(comp);
         
         if (!exito) {
             throw new DatosInvalidosException("Error al registrar el pago. Asegúrese de que el número de comprobante no esté duplicado.");

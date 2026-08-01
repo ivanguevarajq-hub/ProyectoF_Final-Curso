@@ -16,7 +16,7 @@ import java.sql.Timestamp;
  */
 public class DALCaja {
 
-    public boolean registrarPago(Comprobante comprobante) {
+    public static boolean registrarPago(Comprobante comprobante) {
         String sql = "INSERT INTO Comprobantes (numeroComprobante, idAtencion, montoTotal, metodoPago, fechaHora) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {

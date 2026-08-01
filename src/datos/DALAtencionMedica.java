@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class DALAtencionMedica {
 
-    public boolean registrarAtencion(AtencionMedica atencion) {
+    public static boolean registrarAtencion(AtencionMedica atencion) {
         String sql = "INSERT INTO AtencionesMedicas (idCita, motivoConsulta, antecedentes, signosVitales, diagnostico, tratamiento, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -35,7 +35,7 @@ public class DALAtencionMedica {
         }
     }
 
-    public boolean registrarReceta(int idAtencion, int idMedicamento, int cantidad, String indicaciones) {
+    public static boolean registrarReceta(int idAtencion, int idMedicamento, int cantidad, String indicaciones) {
         String sql = "INSERT INTO Recetas (idAtencion, idMedicamento, cantidad, indicaciones) VALUES (?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {

@@ -4,7 +4,7 @@
  */
 package logica;
 
-import datos.DALAuditoria;
+import datos.*;
 import excepciones.DatosInvalidosException;
 
 /**
@@ -24,7 +24,6 @@ public class BLAuditoria {
             throw new DatosInvalidosException("Error interno: Se debe especificar la operación (Ej. REGISTRO, ACTUALIZACIÓN).");
         }
 
-        DALAuditoria dal = new DALAuditoria();
-        return dal.registrarAccionAuditoria(usuario.trim(), modulo.trim(), operacion.trim());
+        return DALAuditoria.registrarAccionAuditoria(usuario.trim(), modulo.trim(), operacion.trim());
     }
 }

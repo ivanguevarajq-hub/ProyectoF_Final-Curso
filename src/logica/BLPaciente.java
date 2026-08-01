@@ -4,11 +4,10 @@
  */
 package logica;
 
-import datos.DALPaciente;
-import entidades.Paciente;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
-import java.time.LocalDate;
-import java.time.Period;
+import java.time.*;
 import java.util.List;
 
 /**
@@ -41,20 +40,19 @@ public class BLPaciente {
         }
 
         Paciente pac = new Paciente(
-            apoderado != null ? apoderado.trim() : "",
-            numeroHistoriaClinica != null ? numeroHistoriaClinica.trim() : "",
-            Paciente.EstadoPaciente.ACTIVO,
-            dni.trim(),
-            nombres.trim(),
-            apellidos.trim(),
-            fechaNacimiento,
-            sexo,
-            telefono.trim(),
-            direccion != null ? direccion.trim() : ""
+                apoderado != null ? apoderado.trim() : "",
+                numeroHistoriaClinica != null ? numeroHistoriaClinica.trim() : "",
+                Paciente.EstadoPaciente.ACTIVO,
+                dni.trim(),
+                nombres.trim(),
+                apellidos.trim(),
+                fechaNacimiento,
+                sexo,
+                telefono.trim(),
+                direccion != null ? direccion.trim() : ""
         );
 
-        DALPaciente dal = new DALPaciente();
-        return dal.registrarPaciente(pac);
+        return DALPaciente.registrarPaciente(pac);
     }
 
     public static boolean modificarPaciente(String dni, String telefono, String direccion, String apoderado) throws Exception {
@@ -71,8 +69,7 @@ public class BLPaciente {
         pac.setDireccion(direccion != null ? direccion.trim() : "");
         pac.setApoderado(apoderado != null ? apoderado.trim() : "");
 
-        DALPaciente dal = new DALPaciente();
-        boolean exito = dal.modificarPaciente(pac);
+        boolean exito = DALPaciente.modificarPaciente(pac);
         if (!exito) {
             throw new DatosInvalidosException("No se pudo modificar. Verifique que el paciente exista.");
         }
@@ -83,10 +80,9 @@ public class BLPaciente {
         if (parametroBusqueda == null || parametroBusqueda.trim().isEmpty()) {
             throw new DatosInvalidosException("Debe ingresar un DNI, nombre o historia clínica para buscar.");
         }
-        
-        DALPaciente dal = new DALPaciente();
-        List<Paciente> resultados = dal.buscarPacientes(parametroBusqueda.trim());
-        
+
+        List<Paciente> resultados = DALPaciente.buscarPacientes(parametroBusqueda.trim());
+
         if (resultados.isEmpty()) {
             throw new DatosInvalidosException("No se encontraron pacientes con ese criterio de búsqueda.");
         }

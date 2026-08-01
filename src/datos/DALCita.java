@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 public class DALCita {
 
-    public boolean registrarCita(Cita cita) {
+    public static boolean registrarCita(Cita cita) {
         String sql = "INSERT INTO Citas (dni_paciente, colegiatura_medico, fecha, horaInicio, horaFin, estado) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -37,7 +37,7 @@ public class DALCita {
         }
     }
 
-    public boolean reprogramarCita(int idCita, Date nuevaFecha, Time nuevaHoraInicio, Time nuevaHoraFin) {
+    public static boolean reprogramarCita(int idCita, Date nuevaFecha, Time nuevaHoraInicio, Time nuevaHoraFin) {
         String sql = "UPDATE Citas SET fecha = ?, horaInicio = ?, horaFin = ?, estado = 'PROGRAMADA' WHERE idCita = ? AND estado != 'ATENDIDA'";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -54,7 +54,7 @@ public class DALCita {
         }
     }
 
-    public boolean cancelarCita(int idCita) {
+    public static boolean cancelarCita(int idCita) {
         String sql = "UPDATE Citas SET estado = 'CANCELADA' WHERE idCita = ?";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {

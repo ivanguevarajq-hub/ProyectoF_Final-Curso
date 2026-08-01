@@ -4,24 +4,21 @@
  */
 package logica;
 
-import datos.DALCita;
-import entidades.Cita;
-import entidades.Medico;
-import entidades.Paciente;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.*;
+import java.time.*;
 
 /**
  *
  * @author samue
  */
+
 public class BLCita {
 
     public static boolean registrarCita(Paciente paciente, Medico medico, LocalDate fecha, LocalTime horaInicio) throws Exception {
-        
+
         if (paciente == null || paciente.getDni() == null || paciente.getDni().trim().isEmpty()) {
             throw new DatosInvalidosException("Debe seleccionar un paciente registrado válido.");
         }
@@ -50,8 +47,7 @@ public class BLCita {
         cita.setHoraInicio(horaInicio);
         cita.setHoraFin(horaFin);
 
-        DALCita dal = new DALCita();
-        return dal.registrarCita(cita);
+        return DALCita.registrarCita(cita);
     }
 
     public static boolean reprogramarCita(int idCita, LocalDate nuevaFecha, LocalTime nuevaHoraInicio) throws Exception {
@@ -72,10 +68,9 @@ public class BLCita {
         }
 
         LocalTime nuevaHoraFin = nuevaHoraInicio.plusMinutes(30);
-        
-        DALCita dal = new DALCita();
-        boolean exito = dal.reprogramarCita(idCita, Date.valueOf(nuevaFecha), Time.valueOf(nuevaHoraInicio), Time.valueOf(nuevaHoraFin));
-        
+
+        boolean exito = DALCita.reprogramarCita(idCita, Date.valueOf(nuevaFecha), Time.valueOf(nuevaHoraInicio), Time.valueOf(nuevaHoraFin));
+
         if (!exito) {
             throw new DatosInvalidosException("No se pudo reprogramar la cita. Verifique que exista y no esté ya atendida.");
         }
@@ -87,9 +82,8 @@ public class BLCita {
             throw new DatosInvalidosException("ID de cita inválido para cancelación.");
         }
 
-        DALCita dal = new DALCita();
-        boolean exito = dal.cancelarCita(idCita);
-        
+        boolean exito = DALCita.cancelarCita(idCita);
+
         if (!exito) {
             throw new DatosInvalidosException("No se pudo cancelar la cita. Es posible que el ID no exista.");
         }

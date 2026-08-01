@@ -4,8 +4,8 @@
  */
 package logica;
 
-import datos.DALUsuario;
-import entidades.Usuario;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
 import java.time.LocalDate;
 
@@ -23,8 +23,7 @@ public class BLUsuario {
             throw new DatosInvalidosException("La contraseña es obligatoria.");
         }
 
-        DALUsuario dal = new DALUsuario();
-        Usuario usu = dal.autenticarUsuario(nombreUsuario.trim(), contrasena.trim());
+        Usuario usu = DALUsuario.autenticarUsuario(nombreUsuario.trim(), contrasena.trim());
         
         if (usu == null) {
             throw new DatosInvalidosException("Credenciales incorrectas o usuario bloqueado.");
@@ -61,9 +60,8 @@ public class BLUsuario {
             telefono.trim(),               
             direccion.trim()               
         );
-
-        DALUsuario dal = new DALUsuario();
-        return dal.registrarUsuario(usu);
+       
+        return DALUsuario.registrarUsuario(usu);
     }
 
     public static boolean bloquearUsuario(int idUsuario) throws Exception {
@@ -71,8 +69,7 @@ public class BLUsuario {
             throw new DatosInvalidosException("El ID del usuario a bloquear no es válido.");
         }
         
-        DALUsuario dal = new DALUsuario();
-        boolean exito = dal.bloquearUsuario(idUsuario);
+        boolean exito = DALUsuario.bloquearUsuario(idUsuario);
         if (!exito) {
             throw new DatosInvalidosException("No se pudo bloquear al usuario. Es posible que no exista.");
         }

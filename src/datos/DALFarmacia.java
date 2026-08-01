@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class DALFarmacia {
 
-    public int consultarStockMedicamento(int idMedicamento) {
+    public static int consultarStockMedicamento(int idMedicamento) {
         String sql = "SELECT stockActual FROM Medicamentos WHERE idMedicamento = ?";
         int stock = 0;
         
@@ -34,7 +34,7 @@ public class DALFarmacia {
         return stock;
     }
 
-    public boolean entregarMedicamento(int idMedicamento, int cantidadEntregada) {
+    public static boolean entregarMedicamento(int idMedicamento, int cantidadEntregada) {
 
         String sql = "UPDATE Medicamentos SET stockActual = stockActual - ? WHERE idMedicamento = ? AND stockActual >= ?";
         

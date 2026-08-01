@@ -4,7 +4,7 @@
  */
 package logica;
 
-import datos.DALLaboratorio;
+import datos.*;
 import excepciones.DatosInvalidosException;
 
 /**
@@ -21,8 +21,7 @@ public class BLLaboratorio {
             throw new DatosInvalidosException("El resultado del examen no puede estar vacío.");
         }
 
-        DALLaboratorio dal = new DALLaboratorio();
-        boolean exito = dal.registrarResultado(idExamen, resultado.trim());
+        boolean exito = DALLaboratorio.registrarResultado(idExamen, resultado.trim());
         
         if (!exito) {
             throw new DatosInvalidosException("No se pudo registrar el resultado. Verifique que el examen exista y no esté ya finalizado o entregado.");

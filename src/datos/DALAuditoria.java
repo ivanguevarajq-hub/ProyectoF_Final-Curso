@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 public class DALAuditoria {
 
-    public boolean registrarAccionAuditoria(String usuario, String modulo, String operacion) {
+    public static boolean registrarAccionAuditoria(String usuario, String modulo, String operacion) {
         String sql = "INSERT INTO Auditoria (usuario, fechaHora, modulo, operacion) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = Conexion.getInstancia().realizarConexion();

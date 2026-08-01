@@ -4,7 +4,7 @@
  */
 package logica;
 
-import datos.DALFarmacia;
+import datos.*;
 import excepciones.DatosInvalidosException;
 
 /**
@@ -18,8 +18,7 @@ public class BLFarmacia {
             throw new DatosInvalidosException("El ID del medicamento no es válido.");
         }
         
-        DALFarmacia dal = new DALFarmacia();
-        return dal.consultarStockMedicamento(idMedicamento);
+        return DALFarmacia.consultarStockMedicamento(idMedicamento);
     }
 
     public static boolean entregarMedicamento(int idMedicamento, int cantidadRequerida) throws Exception {
@@ -29,10 +28,8 @@ public class BLFarmacia {
         if (cantidadRequerida <= 0) {
             throw new DatosInvalidosException("La cantidad a entregar debe ser mayor a cero.");
         }
-
-        DALFarmacia dal = new DALFarmacia();
         
-        int stockActual = dal.consultarStockMedicamento(idMedicamento);
+        int stockActual = DALFarmacia.consultarStockMedicamento(idMedicamento);
         
         if (stockActual == 0) {
             throw new DatosInvalidosException("El medicamento seleccionado se encuentra agotado (Stock: 0).");
@@ -42,7 +39,7 @@ public class BLFarmacia {
         }
 
 
-        boolean exito = dal.entregarMedicamento(idMedicamento, cantidadRequerida);
+        boolean exito = DALFarmacia.entregarMedicamento(idMedicamento, cantidadRequerida);
         
         if (!exito) {
             throw new DatosInvalidosException("Ocurrió un error al intentar actualizar el inventario.");

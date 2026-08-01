@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 public class DALUsuario {
 
-    public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
+    public static Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
         Usuario usuario = null;
         String sql = "SELECT * FROM Usuarios WHERE nombreUsuario = ? AND contrasena = ? AND activo = 1";
 
@@ -45,7 +45,7 @@ public class DALUsuario {
         return usuario;
     }
 
-    public boolean registrarUsuario(Usuario usuario) {
+    public static boolean registrarUsuario(Usuario usuario) {
         String sql = "INSERT INTO Usuarios (dni, nombres, apellidos, nombreUsuario, contrasena, rol, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -65,7 +65,7 @@ public class DALUsuario {
         }
     }
 
-    public boolean bloquearUsuario(int idUsuario) {
+    public static boolean bloquearUsuario(int idUsuario) {
         String sql = "UPDATE Usuarios SET activo = 0 WHERE idUsuario = ?";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {

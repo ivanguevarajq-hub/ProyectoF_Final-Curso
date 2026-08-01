@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class DALMedico {
 
-    public boolean registrarMedico(Medico medico) {
+    public static boolean registrarMedico(Medico medico) {
         String sql = "INSERT INTO Medicos (dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion, numeroColegiatura, especialidad, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conexion.getInstancia().realizarConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -42,7 +42,7 @@ public class DALMedico {
         }
     }
 
-    public List<Medico> consultarMedicosActivos() {
+    public static List<Medico> consultarMedicosActivos() {
         List<Medico> lista = new ArrayList<>();
         String sql = "SELECT * FROM Medicos WHERE activo = 1";
         

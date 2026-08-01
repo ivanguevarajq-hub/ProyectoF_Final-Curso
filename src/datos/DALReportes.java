@@ -16,7 +16,7 @@ import java.util.Map;
  * @author samue
  */
 public class DALReportes {
-    public Map<String, Integer> obtenerPacientesPorEspecialidad() {
+    public static Map<String, Integer> obtenerPacientesPorEspecialidad() {
         Map<String, Integer> reporte = new HashMap<>();
 
         String sql = "SELECT m.especialidad, COUNT(c.idCita) AS totalAtendidos " +
@@ -38,7 +38,7 @@ public class DALReportes {
         return reporte;
     }
 
-    public double obtenerIngresosDelDia(java.sql.Date fecha) {
+    public static double obtenerIngresosDelDia(java.sql.Date fecha) {
         double totalIngresos = 0.0;
         String sql = "SELECT SUM(montoTotal) AS total FROM Comprobantes WHERE DATE(fechaHora) = ?";
         

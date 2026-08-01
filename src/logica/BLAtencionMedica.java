@@ -4,9 +4,8 @@
  */
 package logica;
 
-import datos.DALAtencionMedica;
-import entidades.AtencionMedica;
-import entidades.Cita;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
 
 /**
@@ -35,9 +34,7 @@ public class BLAtencionMedica {
         atencion.setDiagnostico(diagnostico.trim());
         atencion.setTratamiento(tratamiento != null ? tratamiento.trim() : "");
         atencion.setObservaciones(observaciones != null ? observaciones.trim() : "");
-
-        DALAtencionMedica dal = new DALAtencionMedica();
-        return dal.registrarAtencion(atencion);
+        return DALAtencionMedica.registrarAtencion(atencion);
     }
 
     public static boolean registrarReceta(int idAtencion, int idMedicamento, int cantidad, String indicaciones) throws Exception {
@@ -53,8 +50,7 @@ public class BLAtencionMedica {
         if (indicaciones == null || indicaciones.trim().isEmpty()) {
             throw new DatosInvalidosException("Las indicaciones para el paciente son obligatorias.");
         }
-
-        DALAtencionMedica dal = new DALAtencionMedica();
-        return dal.registrarReceta(idAtencion, idMedicamento, cantidad, indicaciones.trim());
+        
+        return DALAtencionMedica.registrarReceta(idAtencion, idMedicamento, cantidad, indicaciones.trim());
     }
 }

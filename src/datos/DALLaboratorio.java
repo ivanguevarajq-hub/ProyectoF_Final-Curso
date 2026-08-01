@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class DALLaboratorio {
 
-    public boolean registrarResultado(int idExamen, String resultado) {
+    public static boolean registrarResultado(int idExamen, String resultado) {
         String sql = "UPDATE ExamenesLaboratorio SET resultado = ?, estado = 'FINALIZADO' WHERE idExamen = ? AND estado != 'ENTREGADO'";
         
         try (Connection conn = Conexion.getInstancia().realizarConexion();

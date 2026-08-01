@@ -4,8 +4,8 @@
  */
 package logica;
 
-import datos.DALMedico;
-import entidades.Medico;
+import datos.*;
+import entidades.*;
 import excepciones.DatosInvalidosException;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,7 +37,6 @@ public class BLMedico {
              throw new DatosInvalidosException("Fecha de nacimiento inválida. El médico debe ser mayor de edad.");
         }
 
-        // Usamos el constructor vacío y setters para evitar errores de orden de parámetros
         Medico med = new Medico();
         med.setDni(dni.trim());
         med.setNombres(nombres.trim());
@@ -50,13 +49,11 @@ public class BLMedico {
         med.setEspecialidad(especialidad.trim());
         med.setActivo(true);
 
-        DALMedico dal = new DALMedico();
-        return dal.registrarMedico(med);
+        return DALMedico.registrarMedico(med);
     }
 
     public static List<Medico> consultarMedicosActivos() throws Exception {
-        DALMedico dal = new DALMedico();
-        List<Medico> lista = dal.consultarMedicosActivos();
+        List<Medico> lista = DALMedico.consultarMedicosActivos();
         
         if (lista.isEmpty()) {
             throw new DatosInvalidosException("No hay médicos activos registrados en el sistema en este momento.");
