@@ -8,6 +8,7 @@ import datos.*;
 import excepciones.DatosInvalidosException;
 import java.time.LocalDate;
 import java.util.Map;
+import utilidades.IExportadorReporte;
 
 /**
  *
@@ -34,4 +35,8 @@ public class BLReportes {
 
         return DALReportes.obtenerIngresosDelDia(java.sql.Date.valueOf(fecha));
     }
+    public static boolean exportarReporteEspecialidades(IExportadorReporte exportador, String rutaDestino) throws Exception {
+    Map<String, Integer> datos = obtenerPacientesPorEspecialidad();
+    return exportador.exportar(datos, rutaDestino);
+}
 }
