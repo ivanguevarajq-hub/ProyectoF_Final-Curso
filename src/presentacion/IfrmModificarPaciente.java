@@ -37,20 +37,10 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         txtDireccion = new javax.swing.JTextField();
         lblDni = new javax.swing.JLabel();
-        dtcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         txtDni = new javax.swing.JTextField();
         lblApoderado = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
         txtApoderado = new javax.swing.JTextField();
-        lblApellido = new javax.swing.JLabel();
-        lblApoderado1 = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        txtHistorial = new javax.swing.JTextField();
-        lblSexo = new javax.swing.JLabel();
-        cmbSexo = new javax.swing.JComboBox<>();
-        txtNombre = new javax.swing.JTextField();
         lblDireccion = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
 
@@ -83,13 +73,6 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
         lblDni.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDni.setText("DNI:");
 
-        dtcFechaNacimiento.setEnabled(false);
-        dtcFechaNacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dtcFechaNacimientoMouseClicked(evt);
-            }
-        });
-
         txtDni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDni.addActionListener(this::txtDniActionPerformed);
         txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -102,61 +85,12 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
         lblApoderado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblApoderado.setText("Apoderado:");
 
-        txtApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtApellido.setEnabled(false);
-        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtApellidoKeyTyped(evt);
-            }
-        });
-
         txtApoderado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtApoderado.setEnabled(false);
-
-        lblApellido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblApellido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblApellido.setText("Apellido:");
-
-        lblApoderado1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblApoderado1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblApoderado1.setText("Historial Clinico:");
-
-        lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblFecha.setText("Fecha de Nacimiento:");
-
-        txtHistorial.setEnabled(false);
-        txtHistorial.addActionListener(this::txtHistorialActionPerformed);
-        txtHistorial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtHistorialKeyTyped(evt);
-            }
-        });
-
-        lblSexo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblSexo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSexo.setText("Sexo:");
-
-        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
-        cmbSexo.setSelectedIndex(-1);
-        cmbSexo.setEnabled(false);
-        cmbSexo.addActionListener(this::cmbSexoActionPerformed);
-
-        txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setEnabled(false);
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
-            }
-        });
 
         lblDireccion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblDireccion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDireccion.setText("Direccion:");
-
-        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNombre.setText("Nombre:");
 
         lblTelefono.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTelefono.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -170,49 +104,26 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(127, 127, 127)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblApellido)
-                            .addComponent(lblNombre)
-                            .addComponent(lblDni)
-                            .addComponent(lblFecha)
-                            .addComponent(lblTelefono)
-                            .addComponent(lblDireccion)
-                            .addComponent(lblApoderado))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtApoderado)
-                                .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)))
+                    .addComponent(lblDni)
+                    .addComponent(lblTelefono)
+                    .addComponent(lblDireccion)
+                    .addComponent(lblApoderado))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtApoderado)
+                    .addComponent(txtDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblApoderado1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnActualizar)
-                        .addGap(44, 44, 44)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(txtHistorial))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)))
+                .addGap(68, 68, 68)
+                .addComponent(btnActualizar)
+                .addGap(55, 55, 55)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -221,30 +132,11 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(lblDni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblApellido)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblFecha)
-                        .addGap(11, 11, 11))
+                        .addComponent(lblDni))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(170, 170, 170)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono))
@@ -256,11 +148,7 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblApoderado))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(lblApoderado1))
-                .addGap(35, 35, 35)
+                .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizar)
                     .addComponent(btnSalir)
@@ -274,23 +162,21 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         try {
             String dni = txtDni.getText();
-            List<Paciente> paciente = BLPaciente.buscarPacientes(dni);
-            Paciente temp = paciente.getFirst();
-            LocalDate fecha = temp.getFechaNacimiento();
-            Date fechaNac = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            txtNombre.setText(temp.getNombres());
-            txtApellido.setText(temp.getApellidos());
-            dtcFechaNacimiento.setDate(fechaNac);
-            if (temp.getSexo() == 'H') {
-                cmbSexo.setSelectedIndex(0);
+            String telefono = txtTelefono.getText();
+            String direccion = txtDireccion.getText();
+            String apoderado = txtApoderado.getText();
+
+            boolean exito = BLPaciente.modificarPaciente(dni, telefono, direccion, apoderado);
+            if (exito) {
+                JOptionPane.showMessageDialog(this,
+                        "Paciente modificado exitosamente.",
+                        "Éxito", 1);
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se pudo completar el registro.",
+                        "Error", 0);
             }
-            if (temp.getSexo() == 'M') {
-                cmbSexo.setSelectedIndex(1);
-            }
-            txtTelefono.setText(temp.getTelefono());
-            txtDireccion.setText(temp.getDireccion());
-            txtApoderado.setText(temp.getApoderado());
-            txtHistorial.setText(temp.getNumeroHistoriaClinica());
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
@@ -301,140 +187,85 @@ public class IfrmModificarPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        menorDeEdad();
+
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        menorDeEdad();
+
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        menorDeEdad();
+
     }//GEN-LAST:event_txtDireccionActionPerformed
 
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
-        menorDeEdad();
-    }//GEN-LAST:event_txtDireccionKeyTyped
 
-    private void dtcFechaNacimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dtcFechaNacimientoMouseClicked
-        menorDeEdad();
-    }//GEN-LAST:event_dtcFechaNacimientoMouseClicked
+    }//GEN-LAST:event_txtDireccionKeyTyped
 
     private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
 
     }//GEN-LAST:event_txtDniActionPerformed
 
     private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
-        menorDeEdad();
+
     }//GEN-LAST:event_txtDniKeyTyped
-
-    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        menorDeEdad();
-    }//GEN-LAST:event_txtApellidoKeyTyped
-
-    private void txtHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHistorialActionPerformed
-        menorDeEdad();
-    }//GEN-LAST:event_txtHistorialActionPerformed
-
-    private void txtHistorialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHistorialKeyTyped
-        menorDeEdad();
-    }//GEN-LAST:event_txtHistorialKeyTyped
-
-    private void cmbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSexoActionPerformed
-        menorDeEdad();
-    }//GEN-LAST:event_cmbSexoActionPerformed
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        menorDeEdad();
-    }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             String dni = txtDni.getText();
             List<Paciente> paciente = BLPaciente.buscarPacientes(dni);
             Paciente temp = paciente.getFirst();
-            LocalDate fecha = temp.getFechaNacimiento();
-            Date fechaNac = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            txtNombre.setText(temp.getNombres());
-            txtApellido.setText(temp.getApellidos());
-            dtcFechaNacimiento.setDate(fechaNac);
-            if (temp.getSexo() == 'H') {
-                cmbSexo.setSelectedIndex(0);
-            }
-            if (temp.getSexo() == 'M') {
-                cmbSexo.setSelectedIndex(1);
-            }
             txtTelefono.setText(temp.getTelefono());
             txtDireccion.setText(temp.getDireccion());
             txtApoderado.setText(temp.getApoderado());
-            txtHistorial.setText(temp.getNumeroHistoriaClinica());
-
+            btnActualizar.setEnabled(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
-                    "Por favor, ",
+                    "Por favor, Ingrese un DNI valido",
                     JOptionPane.WARNING_MESSAGE);
+            limpiar();
+            desactivar();
+            btnActualizar.setEnabled(false);
         }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void menorDeEdad() {
-        Date fechaDate = dtcFechaNacimiento.getDate();
-        if (fechaDate != null) {
-            LocalDate fechaNacimiento = fechaDate.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-            int edad = java.time.Period.between(fechaNacimiento, LocalDate.now()).getYears();
-            if (edad < 18) {
-                txtApoderado.setEnabled(true);
-
-            } else {
-                txtApoderado.setEnabled(false);
-                txtApoderado.setText("");
-            }
-        } else {
-            txtApoderado.setEnabled(false);
-            txtApoderado.setText("");
-        }
-    }
-
     private void limpiar() {
-        txtDni.setText(null);
-        txtNombre.setText(null);
-        txtApellido.setText(null);
-        dtcFechaNacimiento.setDate(null);
-        cmbSexo.setSelectedIndex(-1);
         txtDni.setText(null);
         txtTelefono.setText(null);
         txtDireccion.setText(null);
         txtApoderado.setText(null);
-        txtHistorial.setText(null);
+    }
+
+    private void activar() {
+        txtTelefono.setEnabled(true);
+        txtDireccion.setEnabled(true);
+        txtApoderado.setEnabled(true);
+
+    }
+
+    private void desactivar() {
+        txtTelefono.setEnabled(false);
+        txtDireccion.setEnabled(false);
+        txtApoderado.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbSexo;
-    private com.toedter.calendar.JDateChooser dtcFechaNacimiento;
-    private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblApoderado;
-    private javax.swing.JLabel lblApoderado1;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblDni;
-    private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTelefono;
-    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtApoderado;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtHistorial;
-    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

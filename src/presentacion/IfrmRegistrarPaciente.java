@@ -142,7 +142,6 @@ public class IfrmRegistrarPaciente extends javax.swing.JInternalFrame {
         lblApoderado1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblApoderado1.setText("Historial Clinico:");
 
-        txtHistorial.setText("asdas");
         txtHistorial.addActionListener(this::txtHistorialActionPerformed);
         txtHistorial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
