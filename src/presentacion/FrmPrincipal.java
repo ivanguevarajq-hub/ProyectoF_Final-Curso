@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import entidades.*;
+import entidades.Usuario.RolUsuario;
+import logica.*;
 import javax.swing.JInternalFrame;
 
 /**
@@ -35,13 +38,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
         lblContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        pwbdContrasena = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Clínica San Gabriel - Inicio de Sesión");
         setResizable(false);
 
+        lblBienvenido.setBackground(new java.awt.Color(255, 255, 255));
         lblBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblBienvenido.setText("Bienvenido!");
 
@@ -54,63 +59,61 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblContrasena.setText("Ingrese su Contraseña:");
 
-        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContrasena.addActionListener(this::txtContrasenaActionPerformed);
-
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(this::btnIngresarActionPerformed);
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
+
+        pwbdContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         dppFondo.setLayer(lblBienvenido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(txtContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(btnIngresar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dppFondo.setLayer(pwbdContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dppFondoLayout = new javax.swing.GroupLayout(dppFondo);
         dppFondo.setLayout(dppFondoLayout);
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(153, 153, 153)
+                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
                         .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblContrasena)
-                            .addComponent(lblUsuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(94, 94, 94))))
+                            .addComponent(lblUsuario)
+                            .addComponent(lblContrasena))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pwbdContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94))
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(215, 215, 215)
                 .addComponent(lblBienvenido)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(82, 82, 82)
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(112, 112, 112)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario))
-                .addGap(35, 35, 35)
+                    .addComponent(lblUsuario)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(92, 92, 92)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                    .addComponent(pwbdContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
                     .addComponent(btnSalir))
@@ -136,20 +139,69 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
-
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        Usuario usuario = null;
+         String password = new String(pwbdContrasena.getPassword());
         try {
-            entidades.Usuario u = logica.BLUsuario.iniciarSesion(txtUsuario.getText(),
-                    new String(txtContrasena.getText()));
+            usuario = BLUsuario.iniciarSesion(txtUsuario.getText().trim(),
+                    password);
         } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "No se pudo completar la operacion",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
-            txtContrasena.setText("");
+
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "No se pudo completar la operacion", 0);
+            pwbdContrasena.setText("");
+        } finally {
+            if (usuario != null) {
+                RolUsuario rol = usuario.getRol();
+
+                switch (rol) {
+                    case ADMINISTRADOR -> {
+                        this.dispose();
+                        FrmAdministrador frm = new FrmAdministrador();
+                        frm.setVisible(true);
+                    }
+                    case RECEPCIONISTA -> {
+                        this.dispose();
+                        FrmRecepcionista frm = new FrmRecepcionista();
+                        frm.setVisible(true);
+                    }
+                    case MEDICO -> {
+                        this.dispose();
+                        FrmMedico frm = new FrmMedico();
+                        frm.setVisible(true);
+                    }
+                    case ENFERMERA -> {
+                        this.dispose();
+                        FrmEnfermera frm = new FrmEnfermera();
+                        frm.setVisible(true);
+                    }
+                    case LABORATORISTA -> {
+                        this.dispose();
+                        FrmLaboratorista frm = new FrmLaboratorista();
+                        frm.setVisible(true);
+                    }
+                    case FARMACEUTICO -> {
+                        this.dispose();
+                        FrmFarmaceutico frm = new FrmFarmaceutico();
+                        frm.setVisible(true);
+                    }
+                    case CAJERO -> {
+                        this.dispose();
+                        FrmCajero frm = new FrmCajero();
+                        frm.setVisible(true);
+                    }
+                    case DIRECTOR_MEDICO -> {
+                        this.dispose();
+                        FrmDirectorMedico frm = new FrmDirectorMedico();
+                        frm.setVisible(true);
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,7 +247,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField pwbdContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

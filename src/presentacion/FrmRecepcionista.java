@@ -49,9 +49,10 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         mniConsultaMedicos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menú - Recepcionista");
         setResizable(false);
 
-        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida.setText("Bienvenido!");
 
@@ -61,6 +62,7 @@ public class FrmRecepcionista extends javax.swing.JFrame {
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
 
         dppFondo.setLayer(lblBienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblPregunta, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -71,29 +73,28 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
+                .addContainerGap(219, Short.MAX_VALUE)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(btnCerrarSesion)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
-                .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(168, 168, 168))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                        .addComponent(btnCerrarSesion)
+                        .addGap(273, 273, 273))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                        .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(255, 255, 255))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                        .addComponent(lblBienvenida)
+                        .addGap(213, 213, 213))))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(141, 141, 141)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(57, 57, 57)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGap(40, 40, 40))
         );
 
         mnuPaciente.setText("Paciente");
@@ -103,6 +104,7 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         mnuPaciente.add(mniPaciente);
 
         mniModificar.setText("Modificar Paciente");
+        mniModificar.addActionListener(this::mniModificarActionPerformed);
         mnuPaciente.add(mniModificar);
 
         mniConsulta.setText("Consultar Paciente");
@@ -110,6 +112,7 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         mnuPaciente.add(mniConsulta);
 
         mniBuscar.setText("Buscar Paciente");
+        mniBuscar.addActionListener(this::mniBuscarActionPerformed);
         mnuPaciente.add(mniBuscar);
 
         jMenuBar1.add(mnuPaciente);
@@ -117,12 +120,15 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         mnuCitas.setText("Cita");
 
         mniRegistrarCita.setText("Registrar Cita Medica");
+        mniRegistrarCita.addActionListener(this::mniRegistrarCitaActionPerformed);
         mnuCitas.add(mniRegistrarCita);
 
         mniReprogramar.setText("Reprogramar Cita");
+        mniReprogramar.addActionListener(this::mniReprogramarActionPerformed);
         mnuCitas.add(mniReprogramar);
 
         mniCancelar.setText("Cancelar Cita");
+        mniCancelar.addActionListener(this::mniCancelarActionPerformed);
         mnuCitas.add(mniCancelar);
 
         jMenuBar1.add(mnuCitas);
@@ -130,9 +136,11 @@ public class FrmRecepcionista extends javax.swing.JFrame {
         mnuOtro.setText("Otro");
 
         mniRegistrarInfo.setText("Registrar Info del Seguro Medico");
+        mniRegistrarInfo.addActionListener(this::mniRegistrarInfoActionPerformed);
         mnuOtro.add(mniRegistrarInfo);
 
         mniConsultaMedicos.setText("Consultar Disponibilidad de Medicos");
+        mniConsultaMedicos.addActionListener(this::mniConsultaMedicosActionPerformed);
         mnuOtro.add(mniConsultaMedicos);
 
         jMenuBar1.add(mnuOtro);
@@ -155,37 +163,48 @@ public class FrmRecepcionista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPacienteActionPerformed
-        // TODO add your handling code here:
+        IfrmRegistrarPaciente registrarPaciente = new IfrmRegistrarPaciente();
+        centrarInternalFrame(registrarPaciente);
     }//GEN-LAST:event_mniPacienteActionPerformed
 
     private void mniConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mniConsultaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void mniModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModificarActionPerformed
+        IfrmModificarPaciente modificarPaciente = new IfrmModificarPaciente();
+        centrarInternalFrame(modificarPaciente);
+    }//GEN-LAST:event_mniModificarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmRecepcionista().setVisible(true));
-    }
+    private void mniBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniBuscarActionPerformed
+
+    private void mniRegistrarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRegistrarCitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniRegistrarCitaActionPerformed
+
+    private void mniCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniCancelarActionPerformed
+
+    private void mniReprogramarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReprogramarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniReprogramarActionPerformed
+
+    private void mniRegistrarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRegistrarInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniRegistrarInfoActionPerformed
+
+    private void mniConsultaMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultaMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniConsultaMedicosActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        this.dispose();
+        FrmPrincipal principal = new FrmPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void centrarInternalFrame(JInternalFrame interna) {
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;

@@ -12,11 +12,11 @@ public class DALUsuario {
         Usuario usuario = null;
         String sql = "SELECT * FROM Usuarios WHERE nombreUsuario = ? AND contrasena = ? AND activo = 1";
 
-        Connection conn = Conexion.getInstancia().realizarConexion();
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = Conexion.getInstancia().realizarConexion();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, nombreUsuario);
-            ps.setString(2, contrasena); 
+            ps.setString(2, contrasena);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -35,10 +35,9 @@ public class DALUsuario {
 
     public static boolean registrarUsuario(Usuario usuario, String dni, String nombres, String apellidos) {
         String sql = "INSERT INTO Usuarios (dni, nombres, apellidos, nombreUsuario, contrasena, rol, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        Connection conn = Conexion.getInstancia().realizarConexion();
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, dni);
             ps.setString(2, nombres);
             ps.setString(3, apellidos);
@@ -56,10 +55,9 @@ public class DALUsuario {
 
     public static boolean bloquearUsuario(int idUsuario) {
         String sql = "UPDATE Usuarios SET activo = 0 WHERE idUsuario = ?";
-        
-        Connection conn = Conexion.getInstancia().realizarConexion();
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setInt(1, idUsuario);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {

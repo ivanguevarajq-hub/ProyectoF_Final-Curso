@@ -24,7 +24,7 @@ CREATE TABLE Pacientes (
     telefono VARCHAR(9) NOT NULL,
     direccion VARCHAR(200),
     apoderado VARCHAR(150),
-    numeroHistoriaClinica VARCHAR(20) UNIQUE,
+    numeroHistoriaClinica VARCHAR(200) UNIQUE,
     estado VARCHAR(20) DEFAULT 'ACTIVO'
 );
 
@@ -118,6 +118,8 @@ CREATE TABLE Auditoria (
     operacion VARCHAR(100) NOT NULL
 );
 
+Select * from Pacientes
+
 -- Inserción de un usuario administrador por defecto (Contraseña de ejemplo: Admin123!)
 INSERT INTO Usuarios (dni, nombres, apellidos, nombreUsuario, contrasena, rol, activo) 
-VALUES ('12345678', 'Admin', 'Sistema', 'admin', 'Admin123!', 'ADMINISTRADOR', 1);
+VALUES ('12345678', 'Super Admin', 'Sistema', 'admin', '3eb3fe66b31e3b4d10fa70b5cad49c7112294af6ae4e476a1c405155d45aa121', 'ADMINISTRADOR', 1);
