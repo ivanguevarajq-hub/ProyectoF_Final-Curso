@@ -74,7 +74,8 @@ CREATE TABLE Medicamentos (
     nombre VARCHAR(150) NOT NULL,
     concentracion VARCHAR(50),
     presentacion VARCHAR(50),
-    stockActual INT DEFAULT 0
+    stockActual INT DEFAULT 0,
+    stockMinimo INT DEFAULT 10
 );
 
 -- 8. Tabla Recetas (HU-19)
