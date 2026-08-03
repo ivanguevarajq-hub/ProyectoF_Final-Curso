@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import entidades.Usuario;
+
 /**
  *
  * @author Lenovo
@@ -15,6 +17,10 @@ public class IfrmRegistrarUsuario extends javax.swing.JInternalFrame {
      */
     public IfrmRegistrarUsuario() {
         initComponents();
+        cmbRol.removeAllItems();
+for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
+    cmbRol.addItem(r.name());
+}
     }
 
     /**
@@ -26,124 +32,237 @@ public class IfrmRegistrarUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dppFondo = new javax.swing.JDesktopPane();
-        txtContrasena = new javax.swing.JTextField();
-        txtUsuario = new javax.swing.JTextField();
-        lblUsuario = new javax.swing.JLabel();
-        lblContrasena = new javax.swing.JLabel();
-        cmbRoles = new javax.swing.JComboBox<>();
-        lblRol = new javax.swing.JLabel();
+        panDatosPersonales = new javax.swing.JPanel();
+        lblDni = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
+        lblApellidos = new javax.swing.JLabel();
+        txtDni = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        panDatosAcceso = new javax.swing.JPanel();
+        lblUsuario = new javax.swing.JLabel();
+        lblContrasena = new javax.swing.JLabel();
+        lblConfirmarContrasena = new javax.swing.JLabel();
+        lblRol = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        cmbRol = new javax.swing.JComboBox<>();
+        pwdContraseña = new javax.swing.JPasswordField();
+        pwdConfirmarContraseña = new javax.swing.JPasswordField();
 
-        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContrasena.addActionListener(this::txtContrasenaActionPerformed);
+        panDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Personales"));
 
-        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.addActionListener(this::txtUsuarioActionPerformed);
+        lblDni.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblDni.setText("DNI: ");
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblUsuario.setText("Usuario:");
+        lblNombres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNombres.setText("Nombres: ");
+        lblNombres.setToolTipText("");
 
-        lblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblContrasena.setText("Contraseña:");
+        lblApellidos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblApellidos.setText("Apellidos");
 
-        cmbRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcionista", "Medico", "Enfermera", "Laboratista", "Farmaceutico", "Cajero", "Directo Medico" }));
-        cmbRoles.setSelectedIndex(-1);
+        txtNombres.addActionListener(this::txtNombresActionPerformed);
 
-        lblRol.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRol.setText("Rol:");
-
-        btnRegistrar.setText("Registrar");
-
-        btnSalir.setText("Salir");
-
-        dppFondo.setLayer(txtContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(lblUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(lblContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(cmbRoles, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(lblRol, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(btnRegistrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dppFondo.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout dppFondoLayout = new javax.swing.GroupLayout(dppFondo);
-        dppFondo.setLayout(dppFondoLayout);
-        dppFondoLayout.setHorizontalGroup(
-            dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblContrasena)
-                    .addComponent(lblUsuario)
-                    .addComponent(lblRol))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-            .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(btnRegistrar)
-                .addGap(69, 69, 69)
-                .addComponent(btnSalir)
+        javax.swing.GroupLayout panDatosPersonalesLayout = new javax.swing.GroupLayout(panDatosPersonales);
+        panDatosPersonales.setLayout(panDatosPersonalesLayout);
+        panDatosPersonalesLayout.setHorizontalGroup(
+            panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDatosPersonalesLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblApellidos)
+                    .addComponent(lblDni)
+                    .addComponent(lblNombres))
+                .addGap(18, 18, 18)
+                .addGroup(panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(txtApellidos)
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        dppFondoLayout.setVerticalGroup(
-            dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario))
-                .addGap(45, 45, 45)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panDatosPersonalesLayout.setVerticalGroup(
+            panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDatosPersonalesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDni)
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombres)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblApellidos)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
+
+        btnSalir.setText("salir");
+
+        panDatosAcceso.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Acceso"));
+
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsuario.setText("Usuario: ");
+
+        lblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblContrasena.setText("Contraseña: ");
+
+        lblConfirmarContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblConfirmarContrasena.setText("Confirmar contraseña: ");
+
+        lblRol.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRol.setText("Rol");
+
+        javax.swing.GroupLayout panDatosAccesoLayout = new javax.swing.GroupLayout(panDatosAcceso);
+        panDatosAcceso.setLayout(panDatosAccesoLayout);
+        panDatosAccesoLayout.setHorizontalGroup(
+            panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDatosAccesoLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panDatosAccesoLayout.createSequentialGroup()
+                        .addComponent(lblRol)
+                        .addGap(135, 135, 135)
+                        .addComponent(cmbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panDatosAccesoLayout.createSequentialGroup()
+                        .addComponent(lblConfirmarContrasena)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pwdConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panDatosAccesoLayout.createSequentialGroup()
+                        .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUsuario)
+                            .addComponent(lblContrasena))
+                        .addGap(62, 62, 62)
+                        .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pwdContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+        panDatosAccesoLayout.setVerticalGroup(
+            panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDatosAccesoLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUsuario)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pwdContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConfirmarContrasena)
+                    .addComponent(pwdConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panDatosAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRol)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar)
-                    .addComponent(btnSalir))
-                .addGap(32, 32, 32))
+                    .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnRegistrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(88, 88, 88))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panDatosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panDatosAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panDatosAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnSalir))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
+    }//GEN-LAST:event_txtNombresActionPerformed
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        try {
+            String dni = txtDni.getText().trim();
+            String nombres = txtNombres.getText().trim();
+            String apellidos = txtApellidos.getText().trim();
+            String nombreUsuario = txtUsuario.getText().trim();
+            String contrasena = new String(pwdContraseña.getPassword());
+            String confirmarContrasena = new String(pwdConfirmarContraseña.getPassword());
+
+            Usuario.RolUsuario rol = Usuario.RolUsuario.valueOf(cmbRol.getSelectedItem().toString());
+
+            if (!contrasena.equals(confirmarContrasena)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            boolean exito = logica.BLUsuario.registrarUsuario(
+                    dni,
+                    nombres,
+                    apellidos,
+                    nombreUsuario,
+                    contrasena,
+                    rol,
+                    "admin" // Usuario de auditoría
+            );
+
+            if (exito) {
+                javax.swing.JOptionPane.showMessageDialog(this, "¡Usuario registrado exitosamente!");
+                this.dispose();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (excepciones.DatosInvalidosException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error de sistema: " + ex.getMessage(), "Error crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbRoles;
-    private javax.swing.JDesktopPane dppFondo;
+    private javax.swing.JComboBox<String> cmbRol;
+    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblConfirmarContrasena;
     private javax.swing.JLabel lblContrasena;
+    private javax.swing.JLabel lblDni;
+    private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPanel panDatosAcceso;
+    private javax.swing.JPanel panDatosPersonales;
+    private javax.swing.JPasswordField pwdConfirmarContraseña;
+    private javax.swing.JPasswordField pwdContraseña;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

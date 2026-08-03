@@ -1,30 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
-import java.time.LocalDate;
-
-/**
- *
- * @author samue
- */
-public class Usuario extends Persona{
+public class Usuario {
     private int idUsuario;
     private String nombreUsuario; 
     private String contrasena;
     private RolUsuario rol; 
     private boolean activo;
+    
     public enum RolUsuario {
         ADMINISTRADOR, RECEPCIONISTA, MEDICO, ENFERMERA, 
         LABORATORISTA, FARMACEUTICO, CAJERO, DIRECTOR_MEDICO
     }
-    public Usuario(){
-    super();
+    
+    public Usuario() {
     }
-    public Usuario(int idUsuario, String nombreUsuario, String contrasena, RolUsuario rol, boolean activo, String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion) {
-        super(dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion);
+    
+    public Usuario(int idUsuario, String nombreUsuario, String contrasena, RolUsuario rol, boolean activo) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
@@ -74,7 +65,6 @@ public class Usuario extends Persona{
 
     @Override
     public String toString() {
-        return super.toString()+ "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena + ", rol=" + rol + ", activo=" + activo + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", contrasena=" + contrasena + ", rol=" + rol + ", activo=" + activo + '}';
     }
-    
 }

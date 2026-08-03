@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package presentacion;
-
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 
 /**
  *
  * @author Lenovo
  */
+
 public class FrmAdministrador extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAdministrador.class.getName());
@@ -73,27 +73,26 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addGroup(dppFondoLayout.createSequentialGroup()
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
+                        .addGap(171, 171, 171)
+                        .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(191, 191, 191)
                         .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(209, 209, 209)
+                        .addGap(210, 210, 210)
                         .addComponent(btnCerrarSesion)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
-                .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(168, 168, 168))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(114, 114, 114)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(48, 48, 48)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addGap(83, 83, 83)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         mnuRegistro.setText("Registro");
@@ -103,6 +102,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         mnuRegistro.add(mniUsuarios);
 
         mniMedicos.setText("Registrar Medicos");
+        mniMedicos.addActionListener(this::mniMedicosActionPerformed);
         mnuRegistro.add(mniMedicos);
 
         mniHorarios.setText("Registrar Horarios");
@@ -156,12 +156,32 @@ public class FrmAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuariosActionPerformed
-        // TODO add your handling code here:
+        IfrmRegistrarUsuario ifrmRegistrarUsuario = new IfrmRegistrarUsuario();
+        centrarInternalFrame(ifrmRegistrarUsuario);
     }//GEN-LAST:event_mniUsuariosActionPerformed
 
     private void mniHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHorariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mniHorariosActionPerformed
+
+    private void mniMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniMedicosActionPerformed
+
+    private void centrarInternalFrame(JInternalFrame interna) {
+
+        int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
+        int y = dppFondo.getHeight() / 2 - interna.getHeight() / 2;
+
+        if (interna.isShowing()) {
+            interna.setLocation(x, y);
+        } else {
+            dppFondo.add(interna);
+            interna.setLocation(x, y);
+            interna.show();
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -187,17 +207,8 @@ public class FrmAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new FrmAdministrador().setVisible(true));
     }
-        private void centrarInternalFrame(JInternalFrame interna) {
-        int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
-        int y = dppFondo.getHeight() / 2 - interna.getHeight() / 2;
-        if (interna.isShowing()) {
-            interna.setLocation(x, y);
-        } else {
-            dppFondo.add(interna);
-            interna.setLocation(x, y);
-            interna.show();
-        }
-    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarSesion;

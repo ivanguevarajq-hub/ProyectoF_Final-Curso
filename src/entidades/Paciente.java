@@ -23,9 +23,15 @@ public class Paciente extends Persona {
         this.estado = builder.estado;
     }
 
-    public String getApoderado() { return apoderado; }
-    public String getNumeroHistoriaClinica() { return numeroHistoriaClinica; }
-    public EstadoPaciente getEstado() { return estado; }
+    public String getApoderado() { 
+        return apoderado; 
+    }
+    public String getNumeroHistoriaClinica() { 
+        return numeroHistoriaClinica; 
+    }
+    public EstadoPaciente getEstado() { 
+        return estado; 
+    }
 
     @Override
     public String toString() {

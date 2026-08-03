@@ -19,8 +19,8 @@ public class DALAuditoria {
     public static boolean registrarAccionAuditoria(String usuario, String modulo, String operacion) {
         String sql = "INSERT INTO Auditoria (usuario, fechaHora, modulo, operacion) VALUES (?, ?, ?, ?)";
         
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        Connection conn = Conexion.getInstancia().realizarConexion();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setString(1, usuario);
             ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));

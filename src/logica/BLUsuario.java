@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica;
 
 import datos.*;
 import entidades.*;
 import excepciones.DatosInvalidosException;
 import java.security.MessageDigest;
-import java.time.LocalDate;
 
-/**
- *
- * @author samue
- */
 public class BLUsuario {
+    
     private static String aplicarHash(String password) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(password.getBytes("UTF-8"));
@@ -50,10 +42,16 @@ public class BLUsuario {
         return usu;
     }
 
-    public static boolean registrarUsuario(String dni, String nombres, String apellidos, LocalDate fechaNacimiento, char sexo, String telefono, String direccion, String nombreUsuario, String contrasena, Usuario.RolUsuario rol, String usuarioAuditoria) throws Exception {
+    public static boolean registrarUsuario(String dni, String nombres, String apellidos, String nombreUsuario, String contrasena, Usuario.RolUsuario rol, String usuarioAuditoria) throws Exception {
 
         if (dni == null || dni.trim().length() != 8 || !dni.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El DNI debe tener exactamente 8 números.");
+        }
+        if (nombres == null || nombres.trim().isEmpty()) {
+            throw new DatosInvalidosException("Los nombres son obligatorios.");
+        }
+        if (apellidos == null || apellidos.trim().isEmpty()) {
+            throw new DatosInvalidosException("Los apellidos son obligatorios.");
         }
         if (nombreUsuario == null || nombreUsuario.trim().isEmpty() || nombreUsuario.startsWith(" ")) {
             throw new DatosInvalidosException("El nombre de usuario es obligatorio.");
@@ -67,22 +65,9 @@ public class BLUsuario {
 
         String contrasenaEncriptada = aplicarHash(passLimpio);
 
-        Usuario usu = new Usuario(
-            0,                           
-            nombreUsuario.trim(),        
-            contrasenaEncriptada, 
-            rol,                           
-            true,                          
-            dni.trim(),                    
-            nombres.trim(),                
-            apellidos.trim(),            
-            fechaNacimiento,                
-            sexo,                          
-            telefono.trim(),                
-            direccion.trim()                
-        );
+        Usuario usu = new Usuario(0, nombreUsuario.trim(), contrasenaEncriptada, rol, true);
         
-        boolean exito = DALUsuario.registrarUsuario(usu);
+        boolean exito = DALUsuario.registrarUsuario(usu, dni.trim(), nombres.trim(), apellidos.trim());
 
         if (exito) {
             DALAuditoria.registrarAccionAuditoria(usuarioAuditoria, "Gestión de Usuarios", "Creación de usuario: " + usu.getNombreUsuario());
