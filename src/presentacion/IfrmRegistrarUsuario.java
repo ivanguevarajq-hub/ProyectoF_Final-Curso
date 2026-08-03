@@ -104,6 +104,7 @@ for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         btnSalir.setText("salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
 
         panDatosAcceso.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Acceso"));
 
@@ -243,6 +244,10 @@ for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error de sistema: " + ex.getMessage(), "Error crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

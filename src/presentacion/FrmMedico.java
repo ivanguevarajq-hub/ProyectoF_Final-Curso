@@ -43,7 +43,7 @@ public class FrmMedico extends javax.swing.JFrame {
         mniSolicitarExamenes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("pene");
+        setTitle("Medico");
         setResizable(false);
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
