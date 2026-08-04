@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author IVAN GUEVARA
@@ -13,7 +15,7 @@ public class IfrmCompletarDatosMedico extends javax.swing.JInternalFrame {
     private String dni;
     private String nombres;
     private String apellidos;
-    
+
     /**
      * Creates new form IfrmCompletarDatosMedico
      */
@@ -150,32 +152,40 @@ public class IfrmCompletarDatosMedico extends javax.swing.JInternalFrame {
             String especialidad = txtEspecialidad.getText().trim();
             String telefono = txtTelefono.getText().trim();
             String direccion = txtDireccion.getText().trim();
-            String fechaStr = txtFechaNacimiento.getText().trim(); 
+            String fechaCruda = txtFechaNacimiento.getText();
             char sexo = cmbSexo.getSelectedItem().toString().charAt(0);
 
-            // 1. Creamos un formateador que entienda día-mes-año
-            java.time.format.DateTimeFormatter formatoVisual = java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            
-            // 2. Usamos ese formateador para transformar el texto a fecha
-            java.time.LocalDate fechaNacimiento = java.time.LocalDate.parse(fechaStr, formatoVisual); 
-            
-            // Enviamos los datos a la capa lógica
+            // 1. VALIDACIÓN GENERAL DE CAMPOS VACÍOS (Soluciona el problema)
+            if (colegiatura.isEmpty() || especialidad.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || fechaCruda.replace("-", "").trim().isEmpty()) {
+                throw new excepciones.DatosInvalidosException("Por favor, complete todos los campos del formulario antes de registrar.");
+            }
+
+            // 2. Si todo está lleno, procedemos a formatear la fecha
+            String fechaStr = fechaCruda.trim();
+            java.time.format.DateTimeFormatter formatoVisual = java.time.format.DateTimeFormatter
+                    .ofPattern("dd-MM-uuuu")
+                    .withResolverStyle(java.time.format.ResolverStyle.STRICT);
+
+            java.time.LocalDate fechaNacimiento = java.time.LocalDate.parse(fechaStr, formatoVisual);
+
+            // 3. Enviamos a la capa lógica (donde se validarán las edades, los 9 dígitos, etc.)
             boolean exito = logica.BLMedico.registrarMedico(this.dni, this.nombres, this.apellidos, fechaNacimiento, sexo, telefono, direccion, colegiatura, especialidad);
-            
+
             if (exito) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡Médico registrado exitosamente en el sistema!");
-                this.dispose(); // Cierra esta ventana al terminar
+                this.dispose();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el médico.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            
+
         } catch (java.time.format.DateTimeParseException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Debe completar la fecha de nacimiento correctamente (Ej. 24-05-1990).", "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "La fecha está incompleta o no existe en el calendario (Ej. 24-05-1990).", "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
         } catch (excepciones.DatosInvalidosException ex) {
             javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error de sistema: " + ex.getMessage(), "Error crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
 

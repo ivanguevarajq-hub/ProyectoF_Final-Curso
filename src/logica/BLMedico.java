@@ -33,8 +33,27 @@ public class BLMedico {
         if (especialidad == null || especialidad.trim().isEmpty()) {
             throw new DatosInvalidosException("Debe asignar una especialidad al médico.");
         }
-        if (fechaNacimiento == null || fechaNacimiento.isAfter(LocalDate.now().minusYears(20))) {
-             throw new DatosInvalidosException("Fecha de nacimiento inválida. El médico debe ser mayor de edad.");
+        
+
+        if (telefono == null || telefono.trim().length() != 9 || !telefono.trim().matches("\\d+")) {
+            throw new DatosInvalidosException("El número de teléfono debe tener exactamente 9 dígitos numéricos.");
+        }
+        
+        if (direccion == null || direccion.trim().isEmpty()) {
+            throw new DatosInvalidosException("La dirección es obligatoria.");
+        }
+
+        if (fechaNacimiento.isAfter(java.time.LocalDate.now())) {
+            throw new DatosInvalidosException("El año ingresado es inválido. La fecha de nacimiento no puede ser del futuro.");
+        }
+        
+        int edad = java.time.Period.between(fechaNacimiento, java.time.LocalDate.now()).getYears();
+
+        if (edad < 24) {
+            throw new DatosInvalidosException("Un médico colegiado debe tener al menos 24 años (incluyendo carrera y SERUMS).");
+        }
+        if (edad > 75) {
+            throw new DatosInvalidosException("La edad del médico (" + edad + " años) excede el límite establecido para ejercer (75 años).");
         }
 
         Medico med = new Medico();
@@ -43,8 +62,8 @@ public class BLMedico {
         med.setApellidos(apellidos.trim());
         med.setFechaNacimiento(fechaNacimiento);
         med.setSexo(sexo);
-        med.setTelefono(telefono != null ? telefono.trim() : "");
-        med.setDireccion(direccion != null ? direccion.trim() : "");
+        med.setTelefono(telefono.trim());
+        med.setDireccion(direccion.trim());
         med.setNumeroColegiatura(numeroColegiatura.trim());
         med.setEspecialidad(especialidad.trim());
         med.setActivo(true);
