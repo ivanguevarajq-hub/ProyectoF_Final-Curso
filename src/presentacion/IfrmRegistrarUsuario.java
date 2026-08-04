@@ -5,6 +5,7 @@
 package presentacion;
 
 import entidades.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +19,9 @@ public class IfrmRegistrarUsuario extends javax.swing.JInternalFrame {
     public IfrmRegistrarUsuario() {
         initComponents();
         cmbRol.removeAllItems();
-for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
-    cmbRol.addItem(r.name());
-}
+        for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
+            cmbRol.addItem(r.name());
+        }
     }
 
     /**
@@ -195,7 +196,7 @@ for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnSalir))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
@@ -232,16 +233,26 @@ for (Usuario.RolUsuario r : Usuario.RolUsuario.values()) {
             );
 
             if (exito) {
-                javax.swing.JOptionPane.showMessageDialog(this, "¡Usuario registrado exitosamente!");
+                if (rol == Usuario.RolUsuario.MEDICO) {
+                    JOptionPane.showMessageDialog(this,
+                            "Usuario médico creado con éxito.\nNo olvide registrar su información adicional (CMP, Especialidad) en la opción 'Registrar Médicos'.",
+                            "Aviso Importante",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "¡Usuario registrado exitosamente!");
+                }
+
+                // Esto es lo que lo "bota al inicio" (cierra el InternalFrame)
                 this.dispose();
+
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (excepciones.DatosInvalidosException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Validación", javax.swing.JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error de sistema: " + ex.getMessage(), "Error crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error de sistema: " + ex.getMessage(), "Error crítico", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

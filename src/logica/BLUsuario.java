@@ -90,4 +90,25 @@ public class BLUsuario {
 
         return exito;
     }
+    public static String[] buscarUsuarioMedico(String nombreUsuario) throws Exception {
+        if (nombreUsuario == null || nombreUsuario.trim().isEmpty()) {
+            throw new DatosInvalidosException("Ingrese un nombre de usuario para buscar.");
+        }
+        
+        String[] datos = DALUsuario.obtenerDatosBasicosMedico(nombreUsuario.trim());
+        
+        if (datos == null) {
+            throw new DatosInvalidosException("El usuario no existe o se encuentra inactivo.");
+        }
+        if (!datos[3].equalsIgnoreCase("MEDICO")) {
+            throw new DatosInvalidosException("El usuario encontrado no tiene el rol de MÉDICO (Rol actual: " + datos[3] + ").");
+        }
+        
+        // Verifica si el DNI ya está en la tabla de médicos
+        if (DALMedico.existeMedico(datos[0])) {
+            throw new DatosInvalidosException("Este usuario ya se encuentra registrado en el catálogo de Médicos.");
+        }
+        
+        return datos;
+    }
 }

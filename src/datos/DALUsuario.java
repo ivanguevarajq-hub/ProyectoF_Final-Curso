@@ -65,4 +65,24 @@ public class DALUsuario {
             return false;
         }
     }
+    public static String[] obtenerDatosBasicosMedico(String nombreUsuario) {
+        String sql = "SELECT dni, nombres, apellidos, rol FROM Usuarios WHERE nombreUsuario = ? AND activo = 1";
+        try (Connection conn = Conexion.getInstancia().realizarConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nombreUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new String[] {
+                        rs.getString("dni"),
+                        rs.getString("nombres"),
+                        rs.getString("apellidos"),
+                        rs.getString("rol")
+                    };
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener datos básicos del usuario: " + e.getMessage());
+        }
+        return null;
+    }
 }

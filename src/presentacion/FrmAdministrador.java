@@ -165,7 +165,8 @@ public class FrmAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_mniHorariosActionPerformed
 
     private void mniMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMedicosActionPerformed
-        // TODO add your handling code here:
+        IfrmBuscarUsuarioMedico ifrmBuscarUsuarioMedico = new IfrmBuscarUsuarioMedico();
+        centrarInternalFrame(ifrmBuscarUsuarioMedico);
     }//GEN-LAST:event_mniMedicosActionPerformed
 
     private void centrarInternalFrame(JInternalFrame interna) {

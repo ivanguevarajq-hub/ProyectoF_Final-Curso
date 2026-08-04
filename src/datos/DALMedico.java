@@ -65,4 +65,19 @@ public class DALMedico {
         }
         return lista;
     }
+    public static boolean existeMedico(String dni) {
+        String sql = "SELECT COUNT(*) FROM Medicos WHERE dni = ?";
+        try (Connection conn = Conexion.getInstancia().realizarConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, dni);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al verificar existencia de médico: " + e.getMessage());
+        }
+        return false;
+    }
 }
