@@ -5,8 +5,10 @@
 package datos;
 
 import entidades.Cita;
+import entidades.Medico;
 import entidades.Paciente;
 import java.sql.*;
+import java.time.LocalTime;
 
 /**
  *
@@ -172,5 +174,44 @@ public class DALCita {
             System.err.println("Error al cambiar estado en DALCita: " + e.getMessage());
             throw e;
         }
+    }
+
+    public static boolean confirmarCita(int idCita) {
+        String sql = "UPDATE Citas SET estado = 'CONFIRMADA' WHERE idCita = ?";
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idCita);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al confirmar cita: " + e.getMessage());
+            return false;
+        }
+        
+    }
+    public static Cita obtenerDatosCitaPorMedico(String colegiatura, LocalTime horaInicio) {
+        String sql = "Select * from Citas WHERE colegiatura_medico = ? AND horaInicio = ? ";
+        Cita cita = null;
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, colegiatura);
+            ps.setTime(2, Time.valueOf(horaInicio));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    cita = new Cita();
+                    cita.setIdCita(rs.getInt("idCita"));
+                    Paciente paciente = DALPaciente.buscarPacientes(rs.getString("dni_Paciente")).getFirst();
+                    Medico medico = DALMedico.obtenerMedicoPorColegiatura(rs.getString("colegiatura_medico"));
+                    cita.setPaciente(paciente);
+                    cita.setMedico(medico);
+                    cita.setFecha(rs.getDate("fecha").toLocalDate());
+                    cita.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+                    cita.setHoraFin(rs.getTime("horaFin").toLocalTime());
+                    cita.setEstado(Cita.EstadoCita.valueOf(rs.getString("estado")));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cancelar cita: " + e.getMessage());
+        }
+        return cita;
     }
 }

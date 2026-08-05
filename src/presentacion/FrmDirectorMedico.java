@@ -5,6 +5,7 @@
 package presentacion;
 
 import javax.swing.JInternalFrame;
+import utilidades.InactividadManager;
 
 /**
  *
@@ -12,8 +13,13 @@ import javax.swing.JInternalFrame;
  */
 public class FrmDirectorMedico extends javax.swing.JFrame {
 
+    private InactividadManager inactividadManager;
+
     public FrmDirectorMedico() {
+
         initComponents();
+        inactividadManager = new InactividadManager(this);
+        inactividadManager.iniciar();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,6 +44,7 @@ public class FrmDirectorMedico extends javax.swing.JFrame {
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
 
         btnPagos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPagos.setText("Visualizar Pacientes");
@@ -103,6 +110,15 @@ public class FrmDirectorMedico extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        if (inactividadManager != null) {
+            inactividadManager.detener();
+        }
+        this.dispose();
+        FrmPrincipal principal = new FrmPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
     private void centrarInternalFrame(JInternalFrame interna) {
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
         int y = dppFondo.getHeight() / 2 - interna.getHeight() / 2;

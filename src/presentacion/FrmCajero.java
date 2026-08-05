@@ -5,6 +5,7 @@
 package presentacion;
 
 import javax.swing.JInternalFrame;
+import utilidades.InactividadManager;
 
 /**
  *
@@ -12,11 +13,13 @@ import javax.swing.JInternalFrame;
  */
 public class FrmCajero extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmAdministrador
-     */
+    private InactividadManager inactividadManager;
+
     public FrmCajero() {
+
         initComponents();
+        inactividadManager = new InactividadManager(this);
+        inactividadManager.iniciar();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -42,9 +45,11 @@ public class FrmCajero extends javax.swing.JFrame {
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
 
         btnPagos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPagos.setText("Registrar Pago");
+        btnPagos.addActionListener(this::btnPagosActionPerformed);
 
         btnComprobante.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnComprobante.setText("Emitir Comprobante");
@@ -109,6 +114,19 @@ public class FrmCajero extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        if (inactividadManager != null) {
+            inactividadManager.detener();
+        }
+        this.dispose();
+        FrmPrincipal principal = new FrmPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPagosActionPerformed
 
     private void centrarInternalFrame(JInternalFrame interna) {
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;

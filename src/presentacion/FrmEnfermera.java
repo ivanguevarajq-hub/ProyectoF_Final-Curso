@@ -60,13 +60,14 @@ public class FrmEnfermera extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(295, 295, 295))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion)
-                .addGap(326, 326, 326))
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(338, 338, 338)
+                        .addComponent(btnCerrarSesion)))
                 .addContainerGap(261, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
@@ -78,9 +79,9 @@ public class FrmEnfermera extends javax.swing.JFrame {
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
                 .addComponent(btnSignosVitales, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(63, 63, 63)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addGap(110, 110, 110))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

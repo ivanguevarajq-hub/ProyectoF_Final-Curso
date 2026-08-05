@@ -221,10 +221,9 @@ AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-Insert into medicos (dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion, numeroColegiatura, especialidad, activo) 
-VALUES (87654321, "Juan Alberto", "Manayalle Carranza", '2003-10-20', 'H', 948008081, "Av villapene", "676767", "Urologo", 1);
+INSERT INTO Usuarios (dni, nombres, apellidos, nombreUsuario, contrasena, rol, activo) 
+VALUES ('12345678', 'Super Admin', 'Sistema', 'admin', '3eb3fe66b31e3b4d10fa70b5cad49c7112294af6ae4e476a1c405155d45aa121', 'ADMINISTRADOR', 1);
 
-select * from Citas;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

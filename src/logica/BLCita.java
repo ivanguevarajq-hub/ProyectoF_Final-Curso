@@ -151,4 +151,37 @@ public class BLCita {
         // Llama al método de la capa de datos
         return DALCita.cambiarEstado(idCita, nuevoEstado);
     }
+
+    public static Cita obtenerDatosCitaPorMedico(String colegiatura, LocalTime horaInicio) throws Exception {
+        if (colegiatura.trim().isEmpty() || colegiatura.trim().startsWith(" ")) {
+            throw new DatosInvalidosException("La colegiatura del medico es obligatoria.");
+        }
+        if (horaInicio == null) {
+            throw new DatosInvalidosException("Debe establecer una hora de inicio.");
+        }
+        LocalTime horaApertura = LocalTime.of(8, 0);
+        LocalTime horaCierre = LocalTime.of(20, 0);
+        if (horaInicio.isBefore(horaApertura) || horaInicio.isAfter(horaCierre)) {
+            throw new DatosInvalidosException("El horario debe estar entre las 08:00 y las 20:00.");
+        }
+        Cita cita = DALCita.obtenerDatosCitaPorMedico(colegiatura, horaInicio);
+        if (cita == null) {
+            throw new DatosInvalidosException("La cita no existe o fue cancelada.");
+        }
+        return cita;
+
+    }
+
+    public static boolean confirmarCita(int idCita) throws Exception {
+        if (idCita <= 0) {
+            throw new DatosInvalidosException("ID de cita inválido para cancelación.");
+        }
+
+        boolean exito = DALCita.confirmarCita(idCita);
+
+        if (!exito) {
+            throw new DatosInvalidosException("No se pudo confirmar la cita. Es posible que el ID no exista.");
+        }
+        return exito;
+    }
 }

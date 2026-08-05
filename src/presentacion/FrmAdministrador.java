@@ -3,22 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package presentacion;
+
 import javax.swing.*;
+import utilidades.InactividadManager;
 
 /**
  *
  * @author Lenovo
  */
-
 public class FrmAdministrador extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAdministrador.class.getName());
 
-    /**
-     * Creates new form FrmAdministrador
-     */
+    private InactividadManager inactividadManager;
+
     public FrmAdministrador() {
         initComponents();
+
+        inactividadManager = new InactividadManager(this);
+        inactividadManager.iniciar();
     }
 
     /**
@@ -61,6 +62,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
 
         dppFondo.setLayer(lblBienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblPregunta, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -169,6 +171,15 @@ public class FrmAdministrador extends javax.swing.JFrame {
         centrarInternalFrame(ifrmBuscarUsuarioMedico);
     }//GEN-LAST:event_mniMedicosActionPerformed
 
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        if (inactividadManager != null) {
+            inactividadManager.detener();
+        }
+        this.dispose();
+        FrmPrincipal principal = new FrmPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
     private void centrarInternalFrame(JInternalFrame interna) {
 
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
@@ -183,7 +194,6 @@ public class FrmAdministrador extends javax.swing.JFrame {
         }
 
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

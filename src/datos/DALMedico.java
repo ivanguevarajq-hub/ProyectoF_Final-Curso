@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class DALMedico {
         return false;
     }
 
-    public static Medico obtenerMedicoPorDni(String dni) throws Exception {
+    public static Medico obtenerMedicoPorDni(String dni) {
         Medico medico = null;
         String sql = "SELECT * FROM Medicos WHERE dni = ? AND activo = 1";
 
@@ -101,7 +102,35 @@ public class DALMedico {
                 }
             }
         } catch (SQLException e) {
-            throw new Exception("Error al consultar el médico por DNI: " + e.getMessage(), e);
+            System.err.println("Error al obtener médico: " + e.getMessage());
+        }
+
+        return medico;
+    }
+    public static Medico obtenerMedicoPorColegiatura(String colegiatura) {
+        Medico medico = null;
+        String sql = "SELECT * FROM Medicos WHERE numeroColegiatura = ? AND activo = 1";
+
+        try (Connection cn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, colegiatura);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    medico = new Medico();
+                    medico.setNumeroColegiatura(rs.getString("numeroColegiatura"));
+                    medico.setDni(rs.getString("dni"));
+                    medico.setNombres(rs.getString("nombres"));
+                    medico.setApellidos(rs.getString("apellidos"));                    
+                    medico.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                    medico.setSexo(rs.getString("sexo").charAt(0));
+                    medico.setTelefono(rs.getString("telefono"));
+                    medico.setDireccion(rs.getString("direccion"));
+                    medico.setEspecialidad(rs.getString("especialidad"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener médico: " + e.getMessage());
         }
 
         return medico;

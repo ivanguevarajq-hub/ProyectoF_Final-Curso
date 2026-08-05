@@ -37,7 +37,7 @@ public class BLMedico {
         if (telefono == null || telefono.trim().length() != 9 || !telefono.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El número de teléfono debe tener exactamente 9 dígitos numéricos.");
         }
-        
+
         if (direccion == null || direccion.trim().isEmpty()) {
             throw new DatosInvalidosException("La dirección es obligatoria.");
         }
@@ -45,7 +45,7 @@ public class BLMedico {
         if (fechaNacimiento.isAfter(java.time.LocalDate.now())) {
             throw new DatosInvalidosException("El año ingresado es inválido. La fecha de nacimiento no puede ser del futuro.");
         }
-        
+
         int edad = java.time.Period.between(fechaNacimiento, java.time.LocalDate.now()).getYears();
 
         if (edad < 24) {
@@ -72,21 +72,32 @@ public class BLMedico {
 
     public static List<Medico> consultarMedicosActivos() throws Exception {
         List<Medico> lista = DALMedico.consultarMedicosActivos();
-        
+
         if (lista.isEmpty()) {
             throw new DatosInvalidosException("No hay médicos activos registrados en el sistema en este momento.");
         }
         return lista;
     }
-    
+
     public static Medico obtenerMedicoPorDni(String dni) throws Exception {
-        
-        if (dni == null || dni.trim().isEmpty() || dni.trim().length()!=8) {
+
+        if (dni == null || dni.trim().isEmpty() || dni.trim().length() != 8) {
             throw new DatosInvalidosException("Debe ingresar un DNI valido para continuar.");
         }
         Medico medico = DALMedico.obtenerMedicoPorDni(dni);
         if (medico == null) {
-            throw new DatosInvalidosException("No se encontró medico con ese criterio de búsqueda.");
+            throw new DatosInvalidosException("No se encontró medico con ese dni.");
+        }
+        return medico;
+    }
+
+    public static Medico obtenerMedicoPorColegiatura(String colegiatura) throws Exception {
+        if (colegiatura == null || colegiatura.trim().isEmpty()) {
+            throw new DatosInvalidosException("Debe ingresar un numero de Colegiatura valido para continuar.");
+        }
+        Medico medico = DALMedico.obtenerMedicoPorColegiatura(colegiatura);
+        if (medico == null) {
+            throw new DatosInvalidosException("No se encontró medico con ese numero de Colegiatura.");
         }
         return medico;
     }

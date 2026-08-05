@@ -4,6 +4,12 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+import entidades.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import logica.*;
+
 /**
  *
  * @author Lenovo
@@ -26,21 +32,158 @@ public class IfrmConsultarMedicos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblDisponibildadMedico = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        lblColegiatura = new javax.swing.JLabel();
+        txtDni = new javax.swing.JTextField();
+        lblHora = new javax.swing.JLabel();
+        txtHora = new javax.swing.JTextField();
+        btnConsultar = new javax.swing.JButton();
+
+        lblDisponibildadMedico.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblDisponibildadMedico.setText("Consultar Disponibildiad");
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
+
+        lblColegiatura.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblColegiatura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblColegiatura.setText("DNI del medico:");
+
+        txtDni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDni.addActionListener(this::txtDniActionPerformed);
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniKeyTyped(evt);
+            }
+        });
+
+        lblHora.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHora.setText("<html>Hora que se esta pidiendo: (HH:mm)</html>");
+
+        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(this::btnConsultarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(lblDisponibildadMedico))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblColegiatura)
+                            .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConsultar)
+                .addGap(98, 98, 98)
+                .addComponent(btnSalir)
+                .addGap(156, 156, 156))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(lblDisponibildadMedico)
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblColegiatura)
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnSalir))
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        limpiar();
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
+
+    }//GEN-LAST:event_txtDniKeyTyped
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        String dni = txtDni.getText();
+        LocalTime horaConsultada = LocalTime.parse(txtHora.getText());
+
+        LocalTime infHoraConsultada, supHoraConsultada;
+        try {
+            int hora = horaConsultada.getHour();
+            int min = horaConsultada.getMinute() / 10;
+            if (min == 0 || min == 1 || min == 2) {
+                infHoraConsultada = LocalTime.of(hora, 0);
+                supHoraConsultada = LocalTime.of(hora, 30);
+            } else {
+                infHoraConsultada = LocalTime.of(hora, 30);
+                supHoraConsultada = LocalTime.of(hora + 1, 0);
+            }
+            Medico medico = BLMedico.obtenerMedicoPorDni(dni);
+            Cita cita = BLCita.obtenerDatosCitaPorMedico(medico.getNumeroColegiatura(), infHoraConsultada);
+            if (cita == null) {
+                JOptionPane.showMessageDialog(this,
+                        "El medico se encuentra disponible a ese momento.",
+                        "Respuesta", 1);
+            } else {
+                int opcion = JOptionPane.showConfirmDialog(this,
+                        "El medico ya tiene una cita en el intervalo.\n\t"
+                        + infHoraConsultada.toString() + " - "
+                        + supHoraConsultada.toString() + "\n\t¿Desea confirmarla?",
+                        "Respuesta", javax.swing.JOptionPane.YES_NO_OPTION,
+                        javax.swing.JOptionPane.QUESTION_MESSAGE);
+                if (opcion == javax.swing.JOptionPane.YES_OPTION) {
+                    BLCita.confirmarCita(cita.getIdCita());
+                                JOptionPane.showMessageDialog(this,
+                    "Cita confirmada.",
+                    "Respuesta", 1);
+                }
+            }
+            limpiar();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor verifique que todos los campos esten correctos.",
+                    "Error", 0);
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
+    private void limpiar() {
+        txtDni.setText("");
+        txtHora.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel lblColegiatura;
+    private javax.swing.JLabel lblDisponibildadMedico;
+    private javax.swing.JLabel lblHora;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtHora;
     // End of variables declaration//GEN-END:variables
 }

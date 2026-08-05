@@ -5,6 +5,7 @@
 package presentacion;
 
 import javax.swing.JInternalFrame;
+import utilidades.InactividadManager;
 
 /**
  *
@@ -12,8 +13,13 @@ import javax.swing.JInternalFrame;
  */
 public class FrmRecepcionista extends javax.swing.JFrame {
 
+    private InactividadManager inactividadManager;
+
     public FrmRecepcionista() {
         initComponents();
+
+        inactividadManager = new InactividadManager(this);
+        inactividadManager.iniciar();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -187,14 +193,19 @@ public class FrmRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_mniReprogramarActionPerformed
 
     private void mniRegistrarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRegistrarInfoActionPerformed
-        // TODO add your handling code here:
+        IfrmInfoSeguroMedico infoSeguroMedico = new IfrmInfoSeguroMedico();
+        centrarInternalFrame(infoSeguroMedico);
     }//GEN-LAST:event_mniRegistrarInfoActionPerformed
 
     private void mniConsultaMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultaMedicosActionPerformed
-        // TODO add your handling code here:
+        IfrmConsultarMedicos consultarMedicos = new IfrmConsultarMedicos();
+        centrarInternalFrame(consultarMedicos);
     }//GEN-LAST:event_mniConsultaMedicosActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        if (inactividadManager != null) {
+            inactividadManager.detener();
+        }
         this.dispose();
         FrmPrincipal principal = new FrmPrincipal();
         principal.setVisible(true);
