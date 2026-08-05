@@ -80,7 +80,7 @@ public class DALMedico {
 
     public static Medico obtenerMedicoPorDni(String dni) throws Exception {
         Medico medico = null;
-        String sql = "SELECT * FROM Medicos WHERE activo = 1 WHERE dni = ? AND activo = 1";
+        String sql = "SELECT * FROM Medicos WHERE dni = ? AND activo = 1";
 
         try (Connection cn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = cn.prepareStatement(sql)) {
 
@@ -89,7 +89,7 @@ public class DALMedico {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     medico = new Medico();
-                    medico.setNumeroColegiatura(rs.getString("colegiatura"));
+                    medico.setNumeroColegiatura(rs.getString("numeroColegiatura"));
                     medico.setDni(rs.getString("dni"));
                     medico.setNombres(rs.getString("nombres"));
                     medico.setApellidos(rs.getString("apellidos"));                    

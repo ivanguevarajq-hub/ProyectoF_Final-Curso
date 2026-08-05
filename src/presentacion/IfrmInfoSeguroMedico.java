@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+import logica.BLPaciente;
+
 /**
  *
  * @author Lenovo
@@ -26,19 +29,19 @@ public class IfrmInfoSeguroMedico extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnActualizar = new javax.swing.JButton();
-        lblModificar = new javax.swing.JLabel();
+        btnAgregar = new javax.swing.JButton();
+        lblAgregarSeguro = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         lblDni = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
         lblSeguro = new javax.swing.JLabel();
-        txtApoderado = new javax.swing.JTextField();
+        txtSeguro = new javax.swing.JTextField();
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
-        lblModificar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblModificar.setText("Modificar Paciente");
+        lblAgregarSeguro.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblAgregarSeguro.setText("Agregar Seguro Médico");
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
@@ -59,86 +62,77 @@ public class IfrmInfoSeguroMedico extends javax.swing.JInternalFrame {
         lblSeguro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSeguro.setText("Nombre del Seguro:");
 
-        txtApoderado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtApoderado.setEnabled(false);
+        txtSeguro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(122, 122, 122)
+                .addComponent(btnAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(106, 106, 106))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAgregarSeguro)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSeguro)
                             .addComponent(lblDni))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(btnActualizar)
-                                .addGap(130, 130, 130)
-                                .addComponent(btnSalir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(lblModificar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(63, 63, 63))
+                            .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(lblAgregarSeguro)
                 .addGap(29, 29, 29)
-                .addComponent(lblModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDni)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSeguro))
-                .addGap(87, 87, 87)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
+                    .addComponent(btnAgregar)
                     .addComponent(btnSalir))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        String dni = txtDni.getText();
+        String nombreSeguro = txtSeguro.getText();
         try {
-            String dni = txtDni.getText();
-            String telefono = txtTelefono.getText();
-            String direccion = txtDireccion.getText();
-            String apoderado = txtApoderado.getText();
-
-            boolean exito = BLPaciente.modificarPaciente(dni, telefono, direccion, apoderado);
+            boolean exito = BLPaciente.agregarSeguroMedico(dni, nombreSeguro);
             if (exito) {
                 JOptionPane.showMessageDialog(this,
-                    "Paciente modificado exitosamente.",
-                    "Éxito", 1);
+                        "Seguro Medico Agregado exitosamente.",
+                        "Éxito", 1);
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "No se pudo completar la modificación.",
-                    "Error", 0);
+                        "No se pudo completar el registro.",
+                        "Error", 0);
             }
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
-                ex.getMessage(),
-                "Validación de Datos",
-                JOptionPane.WARNING_MESSAGE);
+                    "Por favor verifique que todos los campos esten correctos.",
+                    "Error", 0);
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         limpiar();
@@ -153,14 +147,18 @@ public class IfrmInfoSeguroMedico extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtDniKeyTyped
 
+    private void limpiar() {
+        txtDni.setText("");
+        txtSeguro.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel lblAgregarSeguro;
     private javax.swing.JLabel lblDni;
-    private javax.swing.JLabel lblModificar;
     private javax.swing.JLabel lblSeguro;
-    private javax.swing.JTextField txtApoderado;
     private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtSeguro;
     // End of variables declaration//GEN-END:variables
 }

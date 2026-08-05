@@ -18,7 +18,7 @@ public class BLCita {
 
     public static boolean registrarCita(int idCita, Paciente paciente, Medico medico, LocalDate fecha, LocalTime horaInicio) throws Exception {
 
-        if (idCita <= 0 || idCita % 1 != 0) {
+        if (idCita <= 0) {
             throw new DatosInvalidosException("Debe escribir un id válido.");
         }
         if (paciente == null || paciente.getDni() == null || paciente.getDni().trim().isEmpty()) {

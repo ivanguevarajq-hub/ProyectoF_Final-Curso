@@ -81,7 +81,7 @@ public class BLMedico {
     
     public static Medico obtenerMedicoPorDni(String dni) throws Exception {
         
-        if (dni == null || dni.trim().isEmpty() || dni.trim().length()==8) {
+        if (dni == null || dni.trim().isEmpty() || dni.trim().length()!=8) {
             throw new DatosInvalidosException("Debe ingresar un DNI valido para continuar.");
         }
         Medico medico = DALMedico.obtenerMedicoPorDni(dni);
