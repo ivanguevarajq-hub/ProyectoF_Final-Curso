@@ -61,7 +61,7 @@ public class IfrmBuscarPacientes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Apellidos", "Fecha Nacimiento", "Sexo", "Telefono", "Apoderado", "Historial Clinico"
+                "DNI", "Nombres", "Fecha Nacimiento", "Sexo", "Telefono", "Apoderado", "Historial Clinico"
             }
         ));
         tblListarPaciente.setAutoscrolls(false);
@@ -137,20 +137,21 @@ public class IfrmBuscarPacientes extends javax.swing.JInternalFrame {
                     if (pac.getSexo() == 'H') {
                         sexo = "Hombre";
                     } else {
-                        sexo = "Mujes";
+                        sexo = "Mujer";
                     }
-                    if (pac.getApoderado() == null) {
+                    if (pac.getApoderado() == null || pac.getApoderado().trim().isEmpty()) {
                         apoderado = "Sin apoderado";
                     }
                     else {
-                        apoderado = pac.getApoderado();
+                        apoderado = pac.getApoderado().trim();
                     }
+                    
                     String anio = String.valueOf(pac.getFechaNacimiento().getYear());
                     String mes = String.valueOf(pac.getFechaNacimiento().getMonth().getValue());
                     String dia = String.valueOf(pac.getFechaNacimiento().getDayOfMonth());
                     tabla.addRow(new Object[]{
                         pac.getDni(),
-                        pac.getApellidos(),
+                        pac.getNombres(),
                         (anio + "-" + mes + "-" + dia),
                         sexo,
                         pac.getTelefono(),
@@ -159,13 +160,11 @@ public class IfrmBuscarPacientes extends javax.swing.JInternalFrame {
                     );
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se han registrado productos aun", "Error", 0);
+                JOptionPane.showMessageDialog(null, "No se han registrado pacientes aun", "Error", 0);
             }
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 0);
         }
-
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

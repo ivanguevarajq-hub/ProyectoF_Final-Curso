@@ -5,11 +5,7 @@
 package datos;
 
 import entidades.Cita;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  *
@@ -64,16 +60,23 @@ public class DALCita {
         }
     }
 
-    public static boolean obtenerCita(int idCita) {
+    public static Cita obtenerDatosCita(int idCita) {
         String sql = "Select * from Citas WHERE idCita = ?";
         Cita cita = null;
         try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, idCita);
-            return ps.executeUpdate() > 0;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cita = new Cita();
+                    cita.setIdCita(rs.getInt("idCita"));
+                    cita.setFecha(rs.getDate("fecha").toLocalDate());
+                    cita.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+                    cita.setHoraFin(rs.getTime("horaFin").toLocalTime());
+                    cita.setEstado(Cita.EstadoCita.valueOf(rs.getString("estado")));
+                }
+            }
         } catch (SQLException e) {
             System.err.println("Error al cancelar cita: " + e.getMessage());
-            return false;
         }
+        return cita;
     }
 }

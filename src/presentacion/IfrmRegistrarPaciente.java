@@ -257,18 +257,18 @@ public class IfrmRegistrarPaciente extends javax.swing.JInternalFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            String dni = txtDni.getText();
-            String nombre = txtNombre.getText();
-            String apellido = txtApellido.getText();
+            String dni = txtDni.getText().trim();
+            String nombre = txtNombre.getText().trim();
+            String apellido = txtApellido.getText().trim();
 
             Date fechaDate = dtcFechaNacimiento.getDate();
             LocalDate fechaNacimiento = fechaDate.toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
-            String telefono = txtTelefono.getText();
-            String direccion = txtDireccion.getText();
-            String apoderado = txtApoderado.getText();
-            String historiaClinica = txtHistorial.getText();
+            String telefono = txtTelefono.getText().trim();
+            String direccion = txtDireccion.getText().trim();
+            String apoderado = txtApoderado.getText().trim();
+            String historiaClinica = txtHistorial.getText().trim();
             char sexo = cmbSexo.getSelectedItem().toString().charAt(0);
             boolean exito = BLPaciente.registrarPaciente(
                     dni, nombre, apellido, fechaNacimiento,

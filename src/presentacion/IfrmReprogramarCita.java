@@ -39,8 +39,6 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
         lblRegistrarCita = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        lblHoraFin = new javax.swing.JLabel();
-        txtHoraFin = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         dtcFecha = new com.toedter.calendar.JDateChooser();
         btnBuscar = new javax.swing.JButton();
@@ -52,6 +50,7 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
         txtHoraInicio.setEnabled(false);
 
         btnReprogramar.setText("Reprogramar");
+        btnReprogramar.setEnabled(false);
         btnReprogramar.addActionListener(this::btnReprogramarActionPerformed);
 
         btnSalir.setText("Salir");
@@ -62,12 +61,6 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
 
         lblId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblId.setText("ID de la Cita:");
-
-        lblHoraFin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblHoraFin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHoraFin.setText("<html>Hora de Inicio: (HH:mm)</html>");
-
-        txtHoraFin.setEnabled(false);
 
         lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblFecha.setText("Fecha de la Cita:");
@@ -92,18 +85,15 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblFecha)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(44, 44, 44)
-                                            .addComponent(lblId))
-                                        .addComponent(lblHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addComponent(lblId))
                                     .addComponent(lblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(52, 52, 52)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dtcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnReprogramar)
@@ -118,11 +108,11 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(lblRegistrarCita)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblId))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFecha)
                     .addComponent(dtcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,16 +120,12 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReprogramar)
                     .addComponent(btnSalir)
                     .addComponent(btnBuscar))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,8 +139,7 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             LocalTime horaInicio = LocalTime.parse(txtHoraInicio.getText());
-            LocalTime horaFin = LocalTime.parse(txtHoraFin.getText());
-            boolean exito = BLCita.reprogramarCita(Integer.valueOf(idCita), fecha, horaInicio, horaFin);
+            boolean exito = BLCita.reprogramarCita(Integer.valueOf(idCita), fecha, horaInicio);
             if (exito) {
                 JOptionPane.showMessageDialog(this,
                         "Cita registrada exitosamente.",
@@ -177,14 +162,17 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-                try {
+        
+        try {
             activar();
-            String id = txtId.getText();
+            txtId.setEnabled(false);
+            int id = Integer.parseInt(txtId.getText().trim());
+            Cita cita = BLCita.obtenerDatosCita(id);
+            LocalDate fecha = cita.getFecha();
+            java.util.Date fechaDate = java.sql.Date.valueOf(fecha);
+            dtcFecha.setDate(fechaDate);
+            txtHoraInicio.setText(cita.getHoraInicio().toString());
             
-            txtTelefono.setText(temp.getTelefono());
-            txtDireccion.setText(temp.getDireccion());
-            txtApoderado.setText(temp.getApoderado());
-            btnActualizar.setEnabled(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
@@ -192,23 +180,25 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
                     JOptionPane.WARNING_MESSAGE);
             limpiar();
             desactivar();
-            btnActualizar.setEnabled(false);
+            setEnabled(true);
+            btnReprogramar.setEnabled(false);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    
     private void activar() {
         dtcFecha.setEnabled(true);
-        txtHoraFin.setEnabled(true);
         txtHoraInicio.setEnabled(true);
     }
-
+    
     private void desactivar() {
         dtcFecha.setEnabled(false);
-        txtHoraFin.setEnabled(false);
         txtHoraInicio.setEnabled(false);
     }
-    private void limpiar(){
-        
+    
+    private void limpiar() {
+        txtHoraInicio.setText("");
+        dtcFecha.setDate(null);
+        txtId.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,11 +207,9 @@ public class IfrmReprogramarCita extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblHoraFin;
     private javax.swing.JLabel lblHoraInicio;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblRegistrarCita;
-    private javax.swing.JTextField txtHoraFin;
     private javax.swing.JTextField txtHoraInicio;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables

@@ -41,8 +41,6 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
         lblRegistrarCita = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        lblHoraFin = new javax.swing.JLabel();
-        txtHoraFin = new javax.swing.JTextField();
 
         lblDniPaciente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblDniPaciente.setText("DNI del Paciente:");
@@ -69,10 +67,6 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
         lblId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblId.setText("ID de la Cita:");
 
-        lblHoraFin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblHoraFin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHoraFin.setText("<html>Hora de Inicio: (HH:mm)</html>");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,16 +91,14 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
                                                 .addComponent(lblFecha)
                                                 .addComponent(lblDniPaciente))
                                             .addComponent(lblId)))
-                                    .addComponent(lblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(52, 52, 52)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDniMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dtcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblRegistrarCita)
                                 .addGap(109, 109, 109)))
@@ -115,7 +107,7 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addComponent(lblRegistrarCita)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,11 +129,7 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnSalir))
@@ -166,8 +154,7 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             LocalTime horaInicio = LocalTime.parse(txtHoraInicio.getText());
-            LocalTime horaFin = LocalTime.parse(txtHoraFin.getText());
-            boolean exito = BLCita.registrarCita(Integer.valueOf(txtId.getText()), paciente, medico, fechaNacimiento, horaInicio, horaFin);
+            boolean exito = BLCita.registrarCita(Integer.valueOf(txtId.getText()), paciente, medico, fechaNacimiento, horaInicio);
             if (exito) {
                 JOptionPane.showMessageDialog(this,
                         "Cita registrada exitosamente.",
@@ -190,7 +177,6 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
         txtDniPaciente.setText(null);
         dtcFecha.setDate(null);
         txtHoraInicio.setText(null);
-        txtHoraFin.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,13 +186,11 @@ public class IfrmRegistrarCita extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDniMedico;
     private javax.swing.JLabel lblDniPaciente;
     private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblHoraFin;
     private javax.swing.JLabel lblHoraInicio;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblRegistrarCita;
     private javax.swing.JTextField txtDniMedico;
     private javax.swing.JTextField txtDniPaciente;
-    private javax.swing.JTextField txtHoraFin;
     private javax.swing.JTextField txtHoraInicio;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
