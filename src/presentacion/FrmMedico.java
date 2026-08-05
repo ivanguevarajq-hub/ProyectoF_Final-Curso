@@ -46,11 +46,11 @@ public class FrmMedico extends javax.swing.JFrame {
         setTitle("Medico");
         setResizable(false);
 
-        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida.setText("Bienvenido!");
 
-        lblPregunta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPregunta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPregunta.setText("¿Qué va a hacer hoy?");
 
@@ -66,26 +66,26 @@ public class FrmMedico extends javax.swing.JFrame {
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(332, 332, 332)
-                .addComponent(btnCerrarSesion)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addContainerGap(313, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(287, 287, 287))
+                    .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(dppFondoLayout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(btnCerrarSesion)
+                .addGap(0, 370, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addGap(104, 104, 104)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
+                .addGap(126, 126, 126)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         mnuCitas.setText("Registro");

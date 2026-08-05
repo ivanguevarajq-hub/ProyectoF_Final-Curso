@@ -41,6 +41,7 @@ public class FrmEnfermera extends javax.swing.JFrame {
 
         btnSignosVitales.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSignosVitales.setText("Registrar Signos Vitales");
+        btnSignosVitales.addActionListener(this::btnSignosVitalesActionPerformed);
 
         dppFondo.setLayer(lblBienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblPregunta, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -94,6 +95,10 @@ public class FrmEnfermera extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSignosVitalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignosVitalesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSignosVitalesActionPerformed
 
     /**
      * @param args the command line arguments

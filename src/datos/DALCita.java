@@ -5,6 +5,7 @@
 package datos;
 
 import entidades.Cita;
+import entidades.Paciente;
 import java.sql.*;
 
 /**
@@ -79,4 +80,44 @@ public class DALCita {
         }
         return cita;
     }
+
+    public static Cita obtenerDatosCitaConPaciente(int idCita) {
+        // Si tus columnas de nombres/apellidos están directo en la tabla Pacientes, 
+        // quita el JOIN con Personas y usa solo: INNER JOIN Pacientes pac ON c.dni_paciente = pac.dni
+        String sql = "SELECT c.*, p.dni, p.nombres, p.apellidos "
+                + "FROM Citas c "
+                + "INNER JOIN Pacientes pac ON c.dni_paciente = pac.dni "
+                + "INNER JOIN Personas p ON pac.dni = p.dni "
+                + "WHERE c.idCita = ?";
+
+        Cita cita = null;
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idCita);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cita = new Cita();
+                    cita.setIdCita(rs.getInt("idCita"));
+                    cita.setFecha(rs.getDate("fecha").toLocalDate());
+                    cita.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+                    cita.setHoraFin(rs.getTime("horaFin").toLocalTime());
+                    cita.setEstado(Cita.EstadoCita.valueOf(rs.getString("estado")));
+
+                    // Creamos el objeto Paciente para que no venga nulo
+                    Paciente paciente = new Paciente.Builder()
+                            .dni(rs.getString("dni"))
+                            .nombres(rs.getString("nombres"))
+                            .apellidos(rs.getString("apellidos"))
+                            .build();
+
+                    cita.setPaciente(paciente);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener datos completos de la cita: " + e.getMessage());
+        }
+        return cita;
+    }
+
 }

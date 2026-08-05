@@ -40,7 +40,7 @@ public class BLCita {
             throw new DatosInvalidosException("La cita debe registrarse dentro del horario de atención (08:00 a 20:00).");
         }
         LocalTime horaFin = horaInicio.plusMinutes(30);
-        
+
         Cita cita = new Cita();
         cita.setIdCita(idCita);
         cita.setPaciente(paciente);
@@ -97,6 +97,19 @@ public class BLCita {
             throw new DatosInvalidosException("ID de Cita inválido.");
         }
         Cita cita = DALCita.obtenerDatosCita(idCita);
+
+        if (cita == null) {
+            throw new DatosInvalidosException("La cita no existe o fue cancelada.");
+        }
+        return cita;
+    }
+
+    public static Cita obtenerDatosCitaConPaciente(int idCita) throws Exception {
+        if (idCita <= 0) {
+            throw new DatosInvalidosException("ID de Cita inválido.");
+        }
+
+        Cita cita = DALCita.obtenerDatosCitaConPaciente(idCita);
 
         if (cita == null) {
             throw new DatosInvalidosException("La cita no existe o fue cancelada.");
