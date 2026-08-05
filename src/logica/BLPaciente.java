@@ -90,6 +90,14 @@ public class BLPaciente {
         return resultados;
     }
 
+    public static boolean agregarSeguroMedico(String dni, String seguroMedico) throws Exception {
+        if (dni == null || dni.trim().length() != 8 || !dni.trim().matches("\\d+")) {
+            throw new DatosInvalidosException("El DNI debe contener exactamente 8 números.");
+        }
+        if (seguroMedico.trim().isEmpty() || seguroMedico.startsWith(" ")) {
+            throw new DatosInvalidosException("Por favor, escriba un seguro médico.");
+        }
+        return DALPaciente.agregarSeguroMedico(dni, seguroMedico);
+    }
 
-    
 }

@@ -18,9 +18,8 @@ public class DALPaciente {
 
     public static boolean registrarPaciente(Paciente paciente) {
         String sql = "INSERT INTO Pacientes (dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion, apoderado, numeroHistoriaClinica, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, paciente.getDni());
             ps.setString(2, paciente.getNombres());
             ps.setString(3, paciente.getApellidos());
@@ -41,9 +40,8 @@ public class DALPaciente {
 
     public static boolean modificarPaciente(Paciente paciente) {
         String sql = "UPDATE Pacientes SET telefono = ?, direccion = ?, apoderado = ? WHERE dni = ?";
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, paciente.getTelefono());
             ps.setString(2, paciente.getDireccion());
             ps.setString(3, paciente.getApoderado());
@@ -60,10 +58,9 @@ public class DALPaciente {
         List<Paciente> lista = new ArrayList<>();
 
         String sql = "SELECT * FROM Pacientes WHERE (dni LIKE ? OR nombres LIKE ? OR numeroHistoriaClinica LIKE ?) AND estado = 'ACTIVO'";
-        
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             String filtro = "%" + parametroBusqueda + "%";
             ps.setString(1, filtro);
             ps.setString(2, filtro);
@@ -71,7 +68,7 @@ public class DALPaciente {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-          
+
                     Paciente p = new Paciente.Builder()
                             .dni(rs.getString("dni"))
                             .nombres(rs.getString("nombres"))
@@ -84,7 +81,7 @@ public class DALPaciente {
                             .numeroHistoriaClinica(rs.getString("numeroHistoriaClinica"))
                             .estado(EstadoPaciente.valueOf(rs.getString("estado")))
                             .build();
-                            
+
                     lista.add(p);
                 }
             }
@@ -92,5 +89,17 @@ public class DALPaciente {
             System.err.println("Error al buscar pacientes: " + e.getMessage());
         }
         return lista;
+    }
+
+    public static boolean agregarSeguroMedico(String dni, String seguroMedico) {
+        String sql = "UPDATE Pacientes SET seguroMedico = ? WHERE dni = ?";
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, seguroMedico);
+            ps.setString(2, dni);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al modificar paciente: " + e.getMessage());
+            return false;
+        }
     }
 }
