@@ -6,7 +6,9 @@ package logica;
 
 import datos.DALFarmacia;
 import entidades.Medicamento;
+import entidades.Receta;
 import excepciones.DatosInvalidosException;
+import java.util.List;
 
 /**
  *
@@ -57,4 +59,15 @@ public class BLFarmacia {
         
         return "ÉXITO: Medicamento entregado correctamente.";
     }
+    
+    public static List<Medicamento> listarInventario(String filtro) throws Exception {
+        return DALFarmacia.listarMedicamentos(filtro == null ? "" : filtro.trim());
+    }
+    public static Receta buscarReceta(String filtro) throws Exception {
+        if (filtro == null || filtro.trim().isEmpty()) {
+            throw new DatosInvalidosException("Debe ingresar el DNI o N° de Atención del paciente.");
+        }
+        return DALFarmacia.buscarRecetaPorDniOAtencion(filtro.trim());
+    }
+    
 }
