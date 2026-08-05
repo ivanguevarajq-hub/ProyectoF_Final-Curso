@@ -14,11 +14,13 @@ import java.time.*;
  *
  * @author samue
  */
-
 public class BLCita {
 
-    public static boolean registrarCita(Paciente paciente, Medico medico, LocalDate fecha, LocalTime horaInicio) throws Exception {
-
+    public static boolean registrarCita(int idCita, Paciente paciente, Medico medico, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) throws Exception {
+        
+        if (idCita<=0 || idCita%1 != 0) {
+            throw new DatosInvalidosException("Debe escribir un id válido.");
+        }
         if (paciente == null || paciente.getDni() == null || paciente.getDni().trim().isEmpty()) {
             throw new DatosInvalidosException("Debe seleccionar un paciente registrado válido.");
         }
@@ -31,16 +33,19 @@ public class BLCita {
         if (horaInicio == null) {
             throw new DatosInvalidosException("Debe establecer una hora de inicio.");
         }
+        if (horaFin == null) {
+            throw new DatosInvalidosException("Debe establecer una hora de fin.");
+        }
 
         LocalTime horaApertura = LocalTime.of(8, 0);
         LocalTime horaCierre = LocalTime.of(20, 0);
-        if (horaInicio.isBefore(horaApertura) || horaInicio.isAfter(horaCierre)) {
+        if (horaInicio.isBefore(horaApertura) || horaInicio.isAfter(horaCierre) 
+                || horaFin.isBefore(horaApertura) || horaFin.isAfter(horaCierre)) {
             throw new DatosInvalidosException("La cita debe registrarse dentro del horario de atención (08:00 a 20:00).");
         }
 
-        LocalTime horaFin = horaInicio.plusMinutes(30);
-
         Cita cita = new Cita();
+        cita.setIdCita(idCita);
         cita.setPaciente(paciente);
         cita.setMedico(medico);
         cita.setFecha(fecha);
@@ -50,7 +55,7 @@ public class BLCita {
         return DALCita.registrarCita(cita);
     }
 
-    public static boolean reprogramarCita(int idCita, LocalDate nuevaFecha, LocalTime nuevaHoraInicio) throws Exception {
+    public static boolean reprogramarCita(int idCita, LocalDate nuevaFecha, LocalTime nuevaHoraInicio, LocalTime nuevaHoraFin) throws Exception {
         if (idCita <= 0) {
             throw new DatosInvalidosException("ID de cita inválido para reprogramar.");
         }
@@ -60,14 +65,14 @@ public class BLCita {
         if (nuevaHoraInicio == null) {
             throw new DatosInvalidosException("La nueva hora de inicio es obligatoria.");
         }
-
+        if (nuevaHoraFin == null) {
+            throw new DatosInvalidosException("La nueva hora de fin es obligatoria.");
+        }
         LocalTime horaApertura = LocalTime.of(8, 0);
         LocalTime horaCierre = LocalTime.of(20, 0);
         if (nuevaHoraInicio.isBefore(horaApertura) || nuevaHoraInicio.isAfter(horaCierre)) {
             throw new DatosInvalidosException("El nuevo horario debe estar entre las 08:00 y las 20:00.");
         }
-
-        LocalTime nuevaHoraFin = nuevaHoraInicio.plusMinutes(30);
 
         boolean exito = DALCita.reprogramarCita(idCita, Date.valueOf(nuevaFecha), Time.valueOf(nuevaHoraInicio), Time.valueOf(nuevaHoraFin));
 
@@ -88,5 +93,10 @@ public class BLCita {
             throw new DatosInvalidosException("No se pudo cancelar la cita. Es posible que el ID no exista.");
         }
         return exito;
+    }
+    public static Cita obtenerCita(int idCita) throws Exception {
+        if (idCita <= 0) {
+            throw new DatosInvalidosException("ID de Cita inválido.");
+        }
     }
 }

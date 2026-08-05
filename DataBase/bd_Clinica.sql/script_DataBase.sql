@@ -44,7 +44,7 @@ CREATE TABLE Medicos (
 
 -- 5. Tabla Citas (HU-13)
 CREATE TABLE Citas (
-    idCita INT AUTO_INCREMENT PRIMARY KEY,
+    idCita INT PRIMARY KEY,
     dni_paciente VARCHAR(8) NOT NULL,
     colegiatura_medico VARCHAR(10) NOT NULL,
     fecha DATE NOT NULL,

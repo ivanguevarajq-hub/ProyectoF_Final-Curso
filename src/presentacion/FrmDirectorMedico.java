@@ -12,16 +12,9 @@ import javax.swing.JInternalFrame;
  */
 public class FrmDirectorMedico extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmDirectorMedico.class.getName());
-
-    /**
-     * Creates new form FrmAdministrador
-     */
     public FrmDirectorMedico() {
         initComponents();
     }
-
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

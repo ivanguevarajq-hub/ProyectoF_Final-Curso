@@ -56,7 +56,7 @@ public class BLPaciente {
     }
 
     public static boolean modificarPaciente(String dni, String telefono, String direccion, String apoderado) throws Exception {
-        
+
         if (dni == null || dni.trim().length() != 8 || !dni.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El DNI proporcionado para modificar no es válido.");
         }
@@ -89,4 +89,7 @@ public class BLPaciente {
         }
         return resultados;
     }
+
+
+    
 }

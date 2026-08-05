@@ -85,7 +85,12 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombres=" + nombres + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", telefono=" + telefono + ", direccion=" + direccion + '}';
+        String sexo="Hombre";
+        if (getSexo() == 'M') {
+            sexo = "Mujer";
+        }
+        
+        return "\n\tDni:" + dni + "\n\tNombres: " + nombres + "\n\tApellidos: " + apellidos + "\n\tFecha de Nacimiento: " + fechaNacimiento + "\n\tSexo: " + sexo  + "\n\tTelefono: " + telefono + "\n\tDireccion: " + direccion;
     }
     
 }

@@ -33,7 +33,6 @@ public class BLMedico {
         if (especialidad == null || especialidad.trim().isEmpty()) {
             throw new DatosInvalidosException("Debe asignar una especialidad al médico.");
         }
-        
 
         if (telefono == null || telefono.trim().length() != 9 || !telefono.trim().matches("\\d+")) {
             throw new DatosInvalidosException("El número de teléfono debe tener exactamente 9 dígitos numéricos.");
@@ -78,5 +77,17 @@ public class BLMedico {
             throw new DatosInvalidosException("No hay médicos activos registrados en el sistema en este momento.");
         }
         return lista;
+    }
+    
+    public static Medico obtenerMedicoPorDni(String dni) throws Exception {
+        
+        if (dni == null || dni.trim().isEmpty()) {
+            throw new DatosInvalidosException("Debe ingresar un DNI valido para continuar.");
+        }
+        Medico medico = DALMedico.obtenerMedicoPorDni(dni);
+        if (medico == null) {
+            throw new DatosInvalidosException("No se encontró medico con ese criterio de búsqueda.");
+        }
+        return medico;
     }
 }

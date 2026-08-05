@@ -4,9 +4,8 @@
  */
 package datos;
 
-import entidades.AtencionMedica;
-import entidades.HistorialClinico;
-import entidades.Paciente;
+import java.sql.*;
+import entidades.*;
 import java.util.List;
 
 /**
@@ -14,14 +13,13 @@ import java.util.List;
  * @author samue
  */
 public class DALHistorialClinico {
-
     public static HistorialClinico obtenerHistorialCompleto(String parametroBusqueda) {
 
         List<Paciente> resultados = DALPaciente.buscarPacientes(parametroBusqueda);
         if (resultados == null || resultados.isEmpty()) {
-            return null; 
+            return null;
         }
-  
+
         Paciente paciente = resultados.get(0);
 
         List<AtencionMedica> historialAtenciones = DALAtencionMedica.obtenerAtencionesPorHistoria(paciente.getNumeroHistoriaClinica());

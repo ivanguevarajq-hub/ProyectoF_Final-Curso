@@ -13,6 +13,7 @@ import java.util.List;
  * @author samue
  */
 public class HistorialClinico {
+
     private final String numeroHistoria;
     private final Paciente paciente;
     private final List<AtencionMedica> atenciones;
@@ -25,10 +26,21 @@ public class HistorialClinico {
         this.fechaEmision = builder.fechaEmision;
     }
 
-    public String getNumeroHistoria() { return numeroHistoria; }
-    public Paciente getPaciente() { return paciente; }
-    public List<AtencionMedica> getAtenciones() { return atenciones; }
-    public LocalDate getFechaEmision() { return fechaEmision; }
+    public String getNumeroHistoria() {
+        return numeroHistoria;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public List<AtencionMedica> getAtenciones() {
+        return atenciones;
+    }
+
+    public LocalDate getFechaEmision() {
+        return fechaEmision;
+    }
 
     @Override
     public String toString() {
@@ -36,6 +48,7 @@ public class HistorialClinico {
     }
 
     public static class Builder {
+
         private String numeroHistoria;
         private Paciente paciente;
         private List<AtencionMedica> atenciones = new ArrayList<>();
@@ -55,7 +68,7 @@ public class HistorialClinico {
             this.atenciones = atenciones;
             return this;
         }
-        
+
         public Builder fechaEmision(LocalDate fechaEmision) {
             this.fechaEmision = fechaEmision;
             return this;

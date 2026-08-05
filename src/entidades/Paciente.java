@@ -35,7 +35,7 @@ public class Paciente extends Persona {
 
     @Override
     public String toString() {
-        return super.toString() + " Paciente{" + "apoderado=" + apoderado + ", numeroHistoriaClinica=" + numeroHistoriaClinica + ", estado=" + estado + '}';
+        return super.toString() + "\n\tApoderado: " + apoderado + "\n\tNumero del Historia Clinico: " + numeroHistoriaClinica;
     }
 
     public static class Builder {

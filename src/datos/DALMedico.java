@@ -21,9 +21,8 @@ public class DALMedico {
 
     public static boolean registrarMedico(Medico medico) {
         String sql = "INSERT INTO Medicos (dni, nombres, apellidos, fechaNacimiento, sexo, telefono, direccion, numeroColegiatura, especialidad, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, medico.getDni());
             ps.setString(2, medico.getNombres());
             ps.setString(3, medico.getApellidos());
@@ -31,8 +30,8 @@ public class DALMedico {
             ps.setString(5, String.valueOf(medico.getSexo()));
             ps.setString(6, medico.getTelefono());
             ps.setString(7, medico.getDireccion());
-            ps.setString(8, medico.getNumeroColegiatura()); 
-            ps.setString(9, medico.getEspecialidad()); 
+            ps.setString(8, medico.getNumeroColegiatura());
+            ps.setString(9, medico.getEspecialidad());
             ps.setBoolean(10, medico.isActivo());
 
             return ps.executeUpdate() > 0;
@@ -45,11 +44,9 @@ public class DALMedico {
     public static List<Medico> consultarMedicosActivos() {
         List<Medico> lista = new ArrayList<>();
         String sql = "SELECT * FROM Medicos WHERE activo = 1";
-        
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
                 Medico m = new Medico();
                 m.setDni(rs.getString("dni"));
@@ -65,10 +62,10 @@ public class DALMedico {
         }
         return lista;
     }
+
     public static boolean existeMedico(String dni) {
         String sql = "SELECT COUNT(*) FROM Medicos WHERE dni = ?";
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, dni);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -79,5 +76,34 @@ public class DALMedico {
             System.err.println("Error al verificar existencia de médico: " + e.getMessage());
         }
         return false;
+    }
+
+    public static Medico obtenerMedicoPorDni(String dni) throws Exception {
+        Medico medico = null;
+        String sql = "SELECT * FROM Medicos WHERE activo = 1 WHERE dni = ? AND activo = 1";
+
+        try (Connection cn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, dni);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    medico = new Medico();
+                    medico.setNumeroColegiatura(rs.getString("colegiatura"));
+                    medico.setDni(rs.getString("dni"));
+                    medico.setNombres(rs.getString("nombres"));
+                    medico.setApellidos(rs.getString("apellidos"));                    
+                    medico.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                    medico.setSexo(rs.getString("sexo").charAt(0));
+                    medico.setTelefono(rs.getString("telefono"));
+                    medico.setDireccion(rs.getString("direccion"));
+                    medico.setEspecialidad(rs.getString("especialidad"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new Exception("Error al consultar el médico por DNI: " + e.getMessage(), e);
+        }
+
+        return medico;
     }
 }
