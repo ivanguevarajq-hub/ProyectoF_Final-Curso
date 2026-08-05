@@ -72,12 +72,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="dppFondo" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="dppFondo" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="dppFondo" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="dppFondo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -88,35 +94,30 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-                          <Component id="lblPregunta" min="-2" pref="180" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
-                          <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="332" max="-2" attributes="0"/>
+                  <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="172" max="32767" attributes="0"/>
-                  <Component id="lblBienvenida" min="-2" pref="219" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                  <EmptySpace pref="313" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblPregunta" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lblBienvenida" min="-2" pref="219" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="lblBienvenida" min="-2" pref="53" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                   <Component id="lblPregunta" min="-2" pref="26" max="-2" attributes="0"/>
-                  <EmptySpace pref="170" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                   <Component id="btnCerrarSesion" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace pref="160" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,7 +138,7 @@
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Que va a hacer hoy?"/>
+            <Property name="text" type="java.lang.String" value="&#xbf;Qu&#xe9; va a hacer hoy?"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCerrarSesion">

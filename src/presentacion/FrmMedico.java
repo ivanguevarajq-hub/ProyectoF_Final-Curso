@@ -52,7 +52,7 @@ public class FrmMedico extends javax.swing.JFrame {
 
         lblPregunta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPregunta.setText("Que va a hacer hoy?");
+        lblPregunta.setText("¿Qué va a hacer hoy?");
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
@@ -66,29 +66,26 @@ public class FrmMedico extends javax.swing.JFrame {
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(btnCerrarSesion)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(332, 332, 332)
+                .addComponent(btnCerrarSesion)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
-                .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(168, 168, 168))
+                .addContainerGap(313, Short.MAX_VALUE)
+                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(287, 287, 287))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(99, 99, 99)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(105, 105, 105)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addGap(108, 108, 108)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         mnuCitas.setText("Registro");
@@ -119,11 +116,15 @@ public class FrmMedico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dppFondo)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dppFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
