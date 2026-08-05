@@ -94,9 +94,11 @@ public class FrmMedico extends javax.swing.JFrame {
         mnuCitas.setText("Registro");
 
         mniRegistrarDiag.setText("Registrar Diagnosticos");
+        mniRegistrarDiag.addActionListener(this::mniRegistrarDiagActionPerformed);
         mnuCitas.add(mniRegistrarDiag);
 
         mniSignosVitales.setText("Registrar Signos Vitales");
+        mniSignosVitales.addActionListener(this::mniSignosVitalesActionPerformed);
         mnuCitas.add(mniSignosVitales);
 
         jMenuBar1.add(mnuCitas);
@@ -127,6 +129,16 @@ public class FrmMedico extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniRegistrarDiagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRegistrarDiagActionPerformed
+        IfrmRegistrarDiagnostico ventana = new IfrmRegistrarDiagnostico();
+        centrarInternalFrame(ventana);
+    }//GEN-LAST:event_mniRegistrarDiagActionPerformed
+
+    private void mniSignosVitalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSignosVitalesActionPerformed
+        IfrmRegistroSignosVitales ventana = new IfrmRegistroSignosVitales();
+        centrarInternalFrame(ventana);
+    }//GEN-LAST:event_mniSignosVitalesActionPerformed
 
 
     private void centrarInternalFrame(JInternalFrame interna) {
