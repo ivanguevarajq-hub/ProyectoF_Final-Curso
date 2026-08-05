@@ -11,11 +11,11 @@ import javax.swing.JInternalFrame;
  * @author Lenovo
  */
 public class FrmEnfermera extends javax.swing.JFrame {
-    
+
     public FrmEnfermera() {
         initComponents();
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -28,13 +28,13 @@ public class FrmEnfermera extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida.setText("Bienvenido!");
 
         lblPregunta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPregunta.setText("Que va a hacer hoy?");
+        lblPregunta.setText("¿Qué va a hacer hoy?");
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
@@ -52,44 +52,50 @@ public class FrmEnfermera extends javax.swing.JFrame {
         dppFondo.setLayout(dppFondoLayout);
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSignosVitales)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dppFondoLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(295, 295, 295))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion)
+                .addGap(326, 326, 326))
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(dppFondoLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnSignosVitales)))
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(btnCerrarSesion)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(250, 250, 250)
+                .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addContainerGap(159, Short.MAX_VALUE)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(76, 76, 76)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                .addComponent(btnSignosVitales, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(89, 89, 89)
+                .addComponent(btnSignosVitales, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(112, 112, 112))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dppFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dppFondo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dppFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,13 +103,13 @@ public class FrmEnfermera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignosVitalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignosVitalesActionPerformed
-        // TODO add your handling code here:
+        IfrmRegistroSignosVitales ventana = new IfrmRegistroSignosVitales();
+        centrarInternalFrame(ventana);
     }//GEN-LAST:event_btnSignosVitalesActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
     private void centrarInternalFrame(JInternalFrame interna) {
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
         int y = dppFondo.getHeight() / 2 - interna.getHeight() / 2;

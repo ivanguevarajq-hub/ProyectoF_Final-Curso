@@ -4,17 +4,32 @@
  */
 package presentacion;
 
+import entidades.*;
+import javax.swing.JOptionPane;
+import logica.BLAtencionMedica;
+import logica.BLCita;
+
 /**
  *
  * @author LENOVO
  */
 public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
 
+    private Cita citaSeleccionada = null;
+
     /**
      * Creates new form IfrmRegistroDiagnostico
      */
     public IfrmRegistroSignosVitales() {
         initComponents();
+        java.awt.event.FocusAdapter calcularIMCListener = new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                calcularIMC();
+            }
+        };
+        txtPeso.addFocusListener(calcularIMCListener);
+        txtTalla.addFocusListener(calcularIMCListener);
     }
 
     /**
@@ -43,11 +58,11 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
         lblPresionDiastolica = new javax.swing.JLabel();
         txtPresionDiastolica = new javax.swing.JTextField();
         lblFrecuenciaRespiratoria = new javax.swing.JLabel();
-        txtFrecuenciaRespiratoria = new javax.swing.JButton();
         lblTemperatura = new javax.swing.JLabel();
         txtTemperatura = new javax.swing.JTextField();
         lblSaturacionOxigeno = new javax.swing.JLabel();
-        txtSaturacionOxigeno = new javax.swing.JButton();
+        txtFrecuenciaRespiratoria = new javax.swing.JTextField();
+        txtSaturacionOxigeno = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         lblPeso = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
@@ -183,8 +198,6 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
 
         lblFrecuenciaRespiratoria.setText("Frecuencia respiratoria (rpm):");
 
-        txtFrecuenciaRespiratoria.addActionListener(this::txtFrecuenciaRespiratoriaActionPerformed);
-
         lblTemperatura.setText("Temperatura:");
 
         lblSaturacionOxigeno.setText("Saturación de Oxígeno (%SpO2):");
@@ -206,39 +219,41 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPresionSistolica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)))
-                .addGap(39, 39, 39)
                 .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSaturacionOxigeno)
-                    .addComponent(lblTemperatura)
-                    .addComponent(lblFrecuenciaRespiratoria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtFrecuenciaRespiratoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTemperatura))
+                    .addGroup(panRegistroSignosVitalesLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(lblSaturacionOxigeno))
+                    .addComponent(lblFrecuenciaRespiratoria, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTemperatura, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                    .addComponent(txtFrecuenciaRespiratoria)
                     .addComponent(txtSaturacionOxigeno))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panRegistroSignosVitalesLayout.setVerticalGroup(
             panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panRegistroSignosVitalesLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFrecuenciaRespiratoria, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panRegistroSignosVitalesLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblPresionArterial))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panRegistroSignosVitalesLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lblFrecuenciaRespiratoria))
-                    .addComponent(lblPresionArterial))
-                .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(9, 9, 9)
+                        .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFrecuenciaRespiratoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFrecuenciaRespiratoria))))
+                .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panRegistroSignosVitalesLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTemperatura)
                             .addComponent(txtTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSaturacionOxigeno)
-                            .addComponent(txtSaturacionOxigeno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtSaturacionOxigeno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panRegistroSignosVitalesLayout.createSequentialGroup()
                         .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPresionSistolica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,7 +262,7 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
                         .addGroup(panRegistroSignosVitalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPresionDiastolica)
                             .addComponent(txtPresionDiastolica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Antropometría"));
@@ -314,14 +329,6 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(panRegistroSignosVitales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(btnGuardar)
-                .addGap(62, 62, 62)
-                .addComponent(btnCancelar)
-                .addGap(57, 57, 57)
-                .addComponent(btnSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -331,6 +338,14 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
                 .addComponent(panDatosPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(btnGuardar)
+                .addGap(62, 62, 62)
+                .addComponent(btnCancelar)
+                .addGap(57, 57, 57)
+                .addComponent(btnSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,30 +362,52 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
                     .addComponent(btnSalir))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFrecuenciaRespiratoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFrecuenciaRespiratoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFrecuenciaRespiratoriaActionPerformed
-
     private void txtDniPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniPacienteActionPerformed
-        // TODO add your handling code here:
+        btnBuscarActionPerformed(evt);
     }//GEN-LAST:event_txtDniPacienteActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String dni = txtDniPaciente.getText().trim();
+
+            if (dni.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese el DNI del paciente.", "Atención", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Búsqueda a través de la capa lógica
+            citaSeleccionada = logica.BLCita.buscarCitaProgramadaPorDni(dni);
+
+            if (citaSeleccionada != null) {
+                String nombreCompleto = citaSeleccionada.getPaciente().getNombres() + " " + citaSeleccionada.getPaciente().getApellidos();
+
+                // Actualización de etiquetas en pantalla
+                lblNumPaciente.setText("PACIENTE: " + nombreCompleto);
+                lblCita.setText("CITA N°: " + citaSeleccionada.getIdCita());
+
+                javax.swing.JOptionPane.showMessageDialog(this, "Cita encontrada exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (excepciones.DatosInvalidosException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Atención", javax.swing.JOptionPane.WARNING_MESSAGE);
+            limpiarCampos();
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al buscar la cita: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoActionPerformed
-        // TODO add your handling code here:
+        calcularIMC();
     }//GEN-LAST:event_txtPesoActionPerformed
 
     private void txtTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTallaActionPerformed
-        // TODO add your handling code here:
+        calcularIMC();
     }//GEN-LAST:event_txtTallaActionPerformed
 
     private void txtIMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIMCActionPerformed
@@ -382,7 +419,50 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPresionSistolicaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (citaSeleccionada == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe buscar y seleccionar una cita antes de registrar los signos vitales.", "Atención", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Forzar recálculo del IMC por seguridad
+            calcularIMC();
+
+            // Concatenación ordenada de los signos vitales para la base de datos
+            String signosFormateados = String.format(
+                    "Peso: %s kg | Talla: %s cm | IMC: %s | PA: %s/%s mmHg | FR: %s rpm | Temp: %s °C | SpO2: %s%%",
+                    txtPeso.getText().trim(),
+                    txtTalla.getText().trim(),
+                    txtIMC.getText().trim(),
+                    txtPresionSistolica.getText().trim(),
+                    txtPresionDiastolica.getText().trim(),
+                    txtFrecuenciaRespiratoria.getText().trim(),
+                    txtTemperatura.getText().trim(),
+                    txtSaturacionOxigeno.getText().trim()
+            );
+
+            // Envío a la capa lógica de atención médica
+            // Simplemente llamas a guardarTriaje (este ya cambia el estado internamente)
+            boolean exito = logica.BLAtencionMedica.guardarTriaje(citaSeleccionada.getIdCita(), signosFormateados);
+
+            if (exito) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "¡Signos vitales registrados y cita confirmada con éxito!",
+                        "Registro Completado",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "No se pudo guardar la información en la base de datos.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (excepciones.DatosInvalidosException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Atención", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al intentar guardar los signos vitales: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -410,6 +490,7 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos() {
+        citaSeleccionada = null;
         txtDniPaciente.setText("");
         lblNumPaciente.setText("PACIENTE: ");
         lblCita.setText("CITA N°: ");
@@ -448,12 +529,12 @@ public class IfrmRegistroSignosVitales extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panDatosPaciente;
     private javax.swing.JPanel panRegistroSignosVitales;
     private javax.swing.JTextField txtDniPaciente;
-    private javax.swing.JButton txtFrecuenciaRespiratoria;
+    private javax.swing.JTextField txtFrecuenciaRespiratoria;
     private javax.swing.JTextField txtIMC;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtPresionDiastolica;
     private javax.swing.JTextField txtPresionSistolica;
-    private javax.swing.JButton txtSaturacionOxigeno;
+    private javax.swing.JTextField txtSaturacionOxigeno;
     private javax.swing.JTextField txtTalla;
     private javax.swing.JTextField txtTemperatura;
     // End of variables declaration//GEN-END:variables

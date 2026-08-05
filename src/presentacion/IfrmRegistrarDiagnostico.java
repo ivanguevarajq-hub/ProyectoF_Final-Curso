@@ -8,6 +8,7 @@ import entidades.Cita;
 import excepciones.DatosInvalidosException;
 import javax.swing.JOptionPane;
 import logica.BLAtencionMedica;
+import logica.BLCita;
 
 /**
  *
@@ -237,69 +238,68 @@ public class IfrmRegistrarDiagnostico extends javax.swing.JInternalFrame {
 
     private void btnBuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCitaActionPerformed
         try {
-        if (txtIdCita.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de Cita.", "Atención", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        int idCita = Integer.parseInt(txtIdCita.getText().trim());
-
-        Cita cita = logica.BLCita.obtenerDatosCitaConPaciente(idCita);
-
-        if (cita != null && cita.getPaciente() != null) {
-            String nombreCompleto = cita.getPaciente().getNombres() + " " + cita.getPaciente().getApellidos();
-            lblNombrePaciente.setText("Nombre del Paciente: " + nombreCompleto);
-            lblEstado.setText("Estado: " + cita.getEstado());
-
-            if (txtSignosVitales.getText().trim().isEmpty()) {
-               
-                btnGuardar.setEnabled(false); 
-                
-                JOptionPane.showMessageDialog(this, 
-                    "⚠️ La Cita #" + idCita + " fue encontrada, pero AÚN NO cuenta con Signos Vitales.\n\n" +
-                    "Por favor, diríjase primero al apartado de 'Registrar Signos Vitales' " +
-                    "y luego vuelva a realizar el diagnóstico.", 
-                    "Triaje / Signos Vitales Pendientes", 
-                    JOptionPane.WARNING_MESSAGE);
-            } else {
-                btnGuardar.setEnabled(true);
-                JOptionPane.showMessageDialog(this, "Cita seleccionada con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "El ID de Cita debe ser un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (DatosInvalidosException e) {
-        
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Atención", JOptionPane.WARNING_MESSAGE);
-        lblNombrePaciente.setText("Nombre del Paciente: -");
-        lblEstado.setText("Estado: -");
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al buscar cita: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    }//GEN-LAST:event_btnBuscarCitaActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try {
             if (txtIdCita.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe buscar un ID de Cita antes de guardar.", "Atención", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            if (txtDiagnostico.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "El campo Diagnóstico es obligatorio.", "Atención", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de Cita.", "Atención", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             int idCita = Integer.parseInt(txtIdCita.getText().trim());
 
-            Cita cita = new Cita();
-            cita.setIdCita(idCita);
+            // 1. Buscamos primero la cita (Valida si existe o está cancelada)
+            Cita cita = logica.BLCita.obtenerDatosCitaConPaciente(idCita);
 
-            // Registro de la atención médica en la BD
+            if (cita != null && cita.getPaciente() != null) {
+                String nombreCompleto = cita.getPaciente().getNombres() + " " + cita.getPaciente().getApellidos();
+                lblNombrePaciente.setText("Nombre del Paciente: " + nombreCompleto);
+                lblEstado.setText("Estado: " + cita.getEstado().name());
+
+                // 2. Buscamos los signos vitales registrados por la enfermera
+                String signosVitales = logica.BLAtencionMedica.obtenerSignosVitalesPorCita(idCita);
+
+                if (signosVitales == null || signosVitales.trim().isEmpty()) {
+                    txtSignosVitales.setText("");
+                    btnGuardar.setEnabled(false);
+
+                    JOptionPane.showMessageDialog(this,
+                            "⚠️ La Cita #" + idCita + " fue encontrada, pero AÚN NO se han registrado los signos vitales por la enfermera.",
+                            "Triaje Pendiente",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    txtSignosVitales.setText(signosVitales);
+                    btnGuardar.setEnabled(true);
+                    JOptionPane.showMessageDialog(this, "Cita seleccionada con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID de Cita debe ser un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (DatosInvalidosException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Atención", JOptionPane.WARNING_MESSAGE);
+            lblNombrePaciente.setText("Nombre del Paciente: -");
+            lblEstado.setText("Estado: -");
+            txtSignosVitales.setText("");
+            btnGuardar.setEnabled(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al buscar cita: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarCitaActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            if (txtIdCita.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe buscar una cita antes de guardar.", "Atención", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int idCita = Integer.parseInt(txtIdCita.getText().trim());
+
+            // Al guardar, obtenemos la Cita actual (que vendrá con estado CONFIRMADA de la BD)
+            Cita citaReal = logica.BLCita.obtenerDatosCitaConPaciente(idCita);
+
+            // Guardamos la atención médica
             boolean exito = BLAtencionMedica.registrarAtencion(
-                    cita,
+                    citaReal,
                     txtMotivoConsulta.getText(),
                     txtAntecedentes.getText(),
                     txtSignosVitales.getText(),
@@ -310,18 +310,13 @@ public class IfrmRegistrarDiagnostico extends javax.swing.JInternalFrame {
 
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Atención médica registrada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                limpiarCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo registrar la atención médica.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID de Cita debe ser un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                lblEstado.setText("Estado: ATENDIDA");
+            }
         } catch (DatosInvalidosException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Atención", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar atención: " + e.getMessage());
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

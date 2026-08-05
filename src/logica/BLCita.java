@@ -109,11 +109,46 @@ public class BLCita {
             throw new DatosInvalidosException("ID de Cita inválido.");
         }
 
+        // 1. Obtenemos los datos de la cita desde la BD
         Cita cita = DALCita.obtenerDatosCitaConPaciente(idCita);
 
+        // 2. Si no existe en la BD
         if (cita == null) {
-            throw new DatosInvalidosException("La cita no existe o fue cancelada.");
+            throw new DatosInvalidosException("La cita no existe en el sistema.");
         }
+
+        // 3. Si existe pero está cancelada
+        if (cita.getEstado() == Cita.EstadoCita.CANCELADA) {
+            throw new DatosInvalidosException("La cita ha sido cancelada.");
+        }
+
         return cita;
+    }
+
+    public static Cita buscarCitaProgramadaPorDni(String dni) throws Exception {
+        if (dni == null || dni.trim().isEmpty()) {
+            throw new DatosInvalidosException("Debe ingresar un DNI válido.");
+        }
+
+        Cita cita = DALCita.buscarCitaProgramadaPorDni(dni.trim());
+
+        if (cita == null) {
+            throw new DatosInvalidosException("No se encontró ninguna cita programada para el DNI ingresado.");
+        }
+
+        return cita;
+    }
+
+    public static boolean cambiarEstado(int idCita, String nuevoEstado) throws Exception {
+        if (idCita <= 0) {
+            throw new DatosInvalidosException("El ID de la cita no es válido.");
+        }
+
+        if (nuevoEstado == null || nuevoEstado.trim().isEmpty()) {
+            throw new DatosInvalidosException("El nuevo estado no puede estar vacío.");
+        }
+
+        // Llama al método de la capa de datos
+        return DALCita.cambiarEstado(idCita, nuevoEstado);
     }
 }

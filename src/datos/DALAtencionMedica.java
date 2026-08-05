@@ -17,12 +17,11 @@ import java.util.List;
 public class DALAtencionMedica {
 
     public static boolean registrarAtencion(AtencionMedica atencion) {
-        String sql = "INSERT INTO AtencionesMedicas (idCita, motivoConsulta, antecedentes, signosVitales, diagnostico, tratamiento, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        String sql = "UPDATE AtencionesMedicas (idCita, motivoConsulta, antecedentes, signosVitales, diagnostico, tratamiento, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            ps.setInt(1, atencion.getCita().getIdCita()); 
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, atencion.getCita().getIdCita());
             ps.setString(2, atencion.getMotivoConsulta());
             ps.setString(3, atencion.getAntecedentes());
             ps.setString(4, atencion.getSignosVitales());
@@ -31,7 +30,7 @@ public class DALAtencionMedica {
             ps.setString(7, atencion.getObservaciones());
 
             return ps.executeUpdate() > 0;
-            
+
         } catch (SQLException e) {
             System.err.println("Error en DALAtencionMedica al registrar atención: " + e.getMessage());
             return false;
@@ -41,14 +40,13 @@ public class DALAtencionMedica {
     public static List<AtencionMedica> obtenerAtencionesPorHistoria(String numeroHistoriaClinica) {
         List<AtencionMedica> lista = new ArrayList<>();
 
-        String sql = "SELECT a.*, c.idCita FROM AtencionesMedicas a " +
-                     "INNER JOIN Citas c ON a.idCita = c.idCita " +
-                     "INNER JOIN Pacientes p ON c.dniPaciente = p.dni " +
-                     "WHERE p.numeroHistoriaClinica = ?";
-        
-        try (Connection conn = Conexion.getInstancia().realizarConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
+        String sql = "SELECT a.*, c.idCita FROM AtencionesMedicas a "
+                + "INNER JOIN Citas c ON a.idCita = c.idCita "
+                + "INNER JOIN Pacientes p ON c.dniPaciente = p.dni "
+                + "WHERE p.numeroHistoriaClinica = ?";
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setString(1, numeroHistoriaClinica);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -65,7 +63,7 @@ public class DALAtencionMedica {
                             .tratamiento(rs.getString("tratamiento"))
                             .observaciones(rs.getString("observaciones"))
                             .build();
-                            
+
                     lista.add(atencion);
                 }
             }
@@ -78,18 +76,18 @@ public class DALAtencionMedica {
     public static boolean registrarReceta(int idAtencion, int idMedicamento, int cantidad, String indicaciones) {
         String sqlReceta = "INSERT INTO Recetas (idAtencion) VALUES (?)";
         String sqlDetalle = "INSERT INTO DetallesReceta (idReceta, idMedicamento, cantidad, indicaciones) VALUES (?, ?, ?, ?)";
-        
+
         Connection conn = null;
         try {
             conn = Conexion.getInstancia().realizarConexion();
-            conn.setAutoCommit(false); 
+            conn.setAutoCommit(false);
 
             int idRecetaGenerada = 0;
 
             try (PreparedStatement psReceta = conn.prepareStatement(sqlReceta, Statement.RETURN_GENERATED_KEYS)) {
                 psReceta.setInt(1, idAtencion);
                 psReceta.executeUpdate();
-                
+
                 try (ResultSet rsKeys = psReceta.getGeneratedKeys()) {
                     if (rsKeys.next()) {
                         idRecetaGenerada = rsKeys.getInt(1);
@@ -107,7 +105,7 @@ public class DALAtencionMedica {
                 psDetalle.executeUpdate();
             }
 
-            conn.commit(); 
+            conn.commit();
             return true;
 
         } catch (SQLException e) {
@@ -129,6 +127,54 @@ public class DALAtencionMedica {
                     System.err.println("Error al cerrar conexión: " + e.getMessage());
                 }
             }
+        }
+    }
+
+    public static AtencionMedica obtenerPorIdCita(int idCita) {
+        String sql = "SELECT * FROM AtencionesMedicas WHERE idCita = ?";
+        AtencionMedica atencion = null;
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idCita);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Cita citaBase = new Cita();
+                    citaBase.setIdCita(idCita);
+
+                    atencion = new AtencionMedica.Builder()
+                            .idAtencion(rs.getInt("idAtencion"))
+                            .cita(citaBase)
+                            .motivoConsulta(rs.getString("motivoConsulta"))
+                            .antecedentes(rs.getString("antecedentes"))
+                            .signosVitales(rs.getString("signosVitales"))
+                            .diagnostico(rs.getString("diagnostico"))
+                            .tratamiento(rs.getString("tratamiento"))
+                            .observaciones(rs.getString("observaciones"))
+                            .build();
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener atención por cita: " + e.getMessage());
+        }
+
+        return atencion;
+    }
+
+    public static boolean registrarTriajeEnfermera(int idCita, String signosVitales) {
+        String sql = "INSERT INTO AtencionesMedicas (idCita, motivoConsulta, signosVitales, diagnostico) VALUES (?, 'TRIAJE ENFERMERIA', ?, 'PENDIENTE DE EVALUACIÓN MÉDICA')";
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idCita);
+            ps.setString(2, signosVitales);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error al registrar signos vitales en DALAtencionMedica: " + e.getMessage());
+            return false;
         }
     }
 }
