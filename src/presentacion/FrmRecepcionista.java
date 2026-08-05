@@ -157,7 +157,7 @@ public class FrmRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_mniPacienteActionPerformed
 
     private void mniConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultaActionPerformed
-       IfrmConsultarPaciente consultarPaciente = new IfrmConsultarPaciente();
+        IfrmConsultarPaciente consultarPaciente = new IfrmConsultarPaciente();
         centrarInternalFrame(consultarPaciente);
     }//GEN-LAST:event_mniConsultaActionPerformed
 
@@ -177,11 +177,13 @@ public class FrmRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_mniRegistrarCitaActionPerformed
 
     private void mniCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCancelarActionPerformed
-        // TODO add your handling code here:
+        IfrmCancelarCita cancelarCita = new IfrmCancelarCita();
+        centrarInternalFrame(cancelarCita);
     }//GEN-LAST:event_mniCancelarActionPerformed
 
     private void mniReprogramarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReprogramarActionPerformed
-        // TODO add your handling code here:
+        IfrmReprogramarCita reprogramarCita = new IfrmReprogramarCita();
+        centrarInternalFrame(reprogramarCita);
     }//GEN-LAST:event_mniReprogramarActionPerformed
 
     private void mniRegistrarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRegistrarInfoActionPerformed
