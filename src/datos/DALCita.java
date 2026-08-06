@@ -67,6 +67,7 @@ public class DALCita {
         String sql = "Select * from Citas WHERE idCita = ?";
         Cita cita = null;
         try (Connection conn = Conexion.getInstancia().realizarConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCita); // ¡Ojo! Aquí faltaba asignarle el parámetro al PreparedStatement
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     cita = new Cita();
@@ -78,7 +79,7 @@ public class DALCita {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al cancelar cita: " + e.getMessage());
+            System.err.println("Error al obtener datos de cita: " + e.getMessage());
         }
         return cita;
     }
@@ -186,8 +187,8 @@ public class DALCita {
             System.err.println("Error al confirmar cita: " + e.getMessage());
             return false;
         }
-        
     }
+
     public static Cita obtenerDatosCitaPorMedico(String colegiatura, LocalTime horaInicio) {
         String sql = "Select * from Citas WHERE colegiatura_medico = ? AND horaInicio = ? ";
         Cita cita = null;
@@ -196,7 +197,6 @@ public class DALCita {
             ps.setTime(2, Time.valueOf(horaInicio));
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-
                     cita = new Cita();
                     cita.setIdCita(rs.getInt("idCita"));
                     Paciente paciente = DALPaciente.buscarPacientes(rs.getString("dni_Paciente")).getFirst();
@@ -210,8 +210,51 @@ public class DALCita {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al cancelar cita: " + e.getMessage());
+            System.err.println("Error al obtener datos de cita por medico: " + e.getMessage());
         }
         return cita;
+    }
+
+    // --- NUEVO MÉTODO PARA LA AGENDA AÑADIDO CORRECTAMENTE ---
+    public static java.util.List<Cita> consultarAgendaPorMedicoYFecha(String colegiatura, java.time.LocalDate fecha) {
+        java.util.List<Cita> listaAgenda = new java.util.ArrayList<>();
+        
+        String sql = "SELECT c.idCita, c.fecha, c.horaInicio, c.horaFin, c.estado, "
+                + "p.dni, p.nombres AS pac_nombres, p.apellidos AS pac_apellidos "
+                + "FROM Citas c "
+                + "INNER JOIN Pacientes p ON c.dni_paciente = p.dni "
+                + "WHERE c.colegiatura_medico = ? AND c.fecha = ? "
+                + "ORDER BY c.horaInicio ASC";
+
+        try (Connection conn = Conexion.getInstancia().realizarConexion(); 
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, colegiatura);
+            ps.setDate(2, Date.valueOf(fecha));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Cita cita = new Cita();
+                    cita.setIdCita(rs.getInt("idCita"));
+                    cita.setFecha(rs.getDate("fecha").toLocalDate());
+                    cita.setHoraInicio(rs.getTime("horaInicio").toLocalTime());
+                    cita.setHoraFin(rs.getTime("horaFin").toLocalTime());
+                    cita.setEstado(Cita.EstadoCita.valueOf(rs.getString("estado")));
+
+                    Paciente paciente = new Paciente.Builder()
+                            .dni(rs.getString("dni"))
+                            .nombres(rs.getString("pac_nombres"))
+                            .apellidos(rs.getString("pac_apellidos"))
+                            .build();
+
+                    cita.setPaciente(paciente);
+                    listaAgenda.add(cita);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al consultar agenda: " + e.getMessage());
+        }
+
+        return listaAgenda;
     }
 }

@@ -41,6 +41,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         pwbdContrasena = new javax.swing.JPasswordField();
+        lblBienvenido1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clínica San Gabriel - Inicio de Sesión");
@@ -48,7 +49,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lblBienvenido.setBackground(new java.awt.Color(255, 255, 255));
         lblBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblBienvenido.setText("Bienvenido!");
+        lblBienvenido.setText("CLINICA \"SAN GABRIEL\"");
 
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.addActionListener(this::txtUsuarioActionPerformed);
@@ -67,6 +68,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pwbdContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        lblBienvenido1.setBackground(new java.awt.Color(255, 255, 255));
+        lblBienvenido1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblBienvenido1.setText("Bienvenido!");
+
         dppFondo.setLayer(lblBienvenido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(lblUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -74,38 +79,47 @@ public class FrmPrincipal extends javax.swing.JFrame {
         dppFondo.setLayer(btnIngresar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dppFondo.setLayer(pwbdContrasena, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dppFondo.setLayer(lblBienvenido1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dppFondoLayout = new javax.swing.GroupLayout(dppFondo);
         dppFondo.setLayout(dppFondoLayout);
         dppFondoLayout.setHorizontalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dppFondoLayout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
+            .addGroup(dppFondoLayout.createSequentialGroup()
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dppFondoLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUsuario)
-                            .addComponent(lblContrasena))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pwbdContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94))
-            .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(215, 215, 215)
-                .addComponent(lblBienvenido)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dppFondoLayout.createSequentialGroup()
+                                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblUsuario)
+                                    .addComponent(lblContrasena))
+                                .addGap(164, 164, 164)
+                                .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pwbdContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(dppFondoLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(lblBienvenido))))
+                    .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(lblBienvenido1)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addGap(58, 58, 58)
+                .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(lblBienvenido1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,11 +127,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
                     .addComponent(pwbdContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIngresar)
-                    .addComponent(btnSalir))
-                .addGap(58, 58, 58))
+                    .addComponent(btnSalir)
+                    .addComponent(btnIngresar))
+                .addGap(135, 135, 135))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,6 +259,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JDesktopPane dppFondo;
     private javax.swing.JLabel lblBienvenido;
+    private javax.swing.JLabel lblBienvenido1;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField pwbdContrasena;

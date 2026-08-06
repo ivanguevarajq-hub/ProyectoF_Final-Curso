@@ -41,11 +41,9 @@ public class FrmAdministrador extends javax.swing.JFrame {
         mniMedicos = new javax.swing.JMenuItem();
         mniHorarios = new javax.swing.JMenuItem();
         mnuUsuarios = new javax.swing.JMenu();
-        mniRoles = new javax.swing.JMenuItem();
         mniBloquearUsuario = new javax.swing.JMenuItem();
         mnuReportes = new javax.swing.JMenu();
         mniReporte = new javax.swing.JMenuItem();
-        mniExcel = new javax.swing.JMenuItem();
         mnuAgendaMedica = new javax.swing.JMenu();
         mniAgenda = new javax.swing.JMenuItem();
 
@@ -54,7 +52,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBienvenida.setText("Bienvenido!");
+        lblBienvenida.setText("Clínica \"San Gabriel\"");
 
         lblPregunta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -75,22 +73,22 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addGroup(dppFondoLayout.createSequentialGroup()
                 .addGroup(dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dppFondoLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(dppFondoLayout.createSequentialGroup()
                         .addGap(191, 191, 191)
                         .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dppFondoLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
-                        .addComponent(btnCerrarSesion)))
-                .addContainerGap(195, Short.MAX_VALUE))
+                        .addComponent(btnCerrarSesion))
+                    .addGroup(dppFondoLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         dppFondoLayout.setVerticalGroup(
             dppFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dppFondoLayout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addGap(134, 134, 134)
                 .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(28, 28, 28)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,9 +113,6 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         mnuUsuarios.setText("Usuario");
 
-        mniRoles.setText("Administrar Roles");
-        mnuUsuarios.add(mniRoles);
-
         mniBloquearUsuario.setText("Bloquear Usuario");
         mnuUsuarios.add(mniBloquearUsuario);
 
@@ -126,16 +121,15 @@ public class FrmAdministrador extends javax.swing.JFrame {
         mnuReportes.setText("Reportes");
 
         mniReporte.setText("Generar Reporte");
+        mniReporte.addActionListener(this::mniReporteActionPerformed);
         mnuReportes.add(mniReporte);
-
-        mniExcel.setText("Exportar a Excel");
-        mnuReportes.add(mniExcel);
 
         jMenuBar1.add(mnuReportes);
 
         mnuAgendaMedica.setText("Agenda Medica");
 
         mniAgenda.setText("Consultar Agenda Medica");
+        mniAgenda.addActionListener(this::mniAgendaActionPerformed);
         mnuAgendaMedica.add(mniAgenda);
 
         jMenuBar1.add(mnuAgendaMedica);
@@ -180,6 +174,16 @@ public class FrmAdministrador extends javax.swing.JFrame {
         principal.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
+    private void mniAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAgendaActionPerformed
+        IfrmConsultarAgenda ifrmConsultarAgenda = new IfrmConsultarAgenda();
+        centrarInternalFrame(ifrmConsultarAgenda);
+    }//GEN-LAST:event_mniAgendaActionPerformed
+
+    private void mniReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReporteActionPerformed
+       IfrmReportes ifrmReportes = new IfrmReportes();
+        centrarInternalFrame(ifrmReportes);
+    }//GEN-LAST:event_mniReporteActionPerformed
+
     private void centrarInternalFrame(JInternalFrame interna) {
 
         int x = dppFondo.getWidth() / 2 - interna.getWidth() / 2;
@@ -204,11 +208,9 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel lblPregunta;
     private javax.swing.JMenuItem mniAgenda;
     private javax.swing.JMenuItem mniBloquearUsuario;
-    private javax.swing.JMenuItem mniExcel;
     private javax.swing.JMenuItem mniHorarios;
     private javax.swing.JMenuItem mniMedicos;
     private javax.swing.JMenuItem mniReporte;
-    private javax.swing.JMenuItem mniRoles;
     private javax.swing.JMenuItem mniUsuarios;
     private javax.swing.JMenu mnuAgendaMedica;
     private javax.swing.JMenu mnuRegistro;

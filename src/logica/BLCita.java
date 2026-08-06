@@ -148,7 +148,6 @@ public class BLCita {
             throw new DatosInvalidosException("El nuevo estado no puede estar vacío.");
         }
 
-        // Llama al método de la capa de datos
         return DALCita.cambiarEstado(idCita, nuevoEstado);
     }
 
@@ -183,5 +182,17 @@ public class BLCita {
             throw new DatosInvalidosException("No se pudo confirmar la cita. Es posible que el ID no exista.");
         }
         return exito;
+    }
+    
+    public static java.util.List<Cita> consultarAgendaPorMedicoYFecha(String colegiatura, LocalDate fecha) throws Exception {
+        if (colegiatura == null || colegiatura.trim().isEmpty()) {
+            throw new DatosInvalidosException("Debe seleccionar un médico para consultar su agenda.");
+        }
+        if (fecha == null) {
+            throw new DatosInvalidosException("Debe ingresar una fecha válida para la consulta.");
+        }
+
+        
+        return DALCita.consultarAgendaPorMedicoYFecha(colegiatura.trim(), fecha);
     }
 }
